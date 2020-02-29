@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="VariablesListStore">
+    <columns>
+      <!-- column-name Variable -->
+      <column type="gchararray"/>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Red value 0 - 255</col>
+        <col id="1">$r$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Green value 0 - 255</col>
+        <col id="1">$g$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Blue value 0 - 255</col>
+        <col id="1">$b$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Alpha value 0 - 255</col>
+        <col id="1">$a$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Red value as double 0.0 - 1.0</col>
+        <col id="1">$r_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Green value as double 0.0 - 1.0</col>
+        <col id="1">$g_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Blue value as double 0.0 - 1.0</col>
+        <col id="1">$b_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Alpha value as double 0.0 - 1.0</col>
+        <col id="1">$a_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Red as hex value 00 - ff</col>
+        <col id="1">$r_hex$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Green as hex value 00 - ff</col>
+        <col id="1">$g_hex$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Blue as hex value 00 - ff</col>
+        <col id="1">$b_hex$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Alpha as hex value 00 - ff</col>
+        <col id="1">$a_hex$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Hue value 0° -  360°</col>
+        <col id="1">$h$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Saturation value 0% - 100%</col>
+        <col id="1">$s$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Lightness 0% - 100%</col>
+        <col id="1">$l$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Saturation as double 0.0 - 1.0</col>
+        <col id="1">$s_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Lightness as double 0.0 - 1.0</col>
+        <col id="1">$l_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Cyan value 0 - 100</col>
+        <col id="1">$c$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Magenta value 0 - 100</col>
+        <col id="1" translatable="yes">$m$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Yellow value 0 - 100</col>
+        <col id="1">$y$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Key value 0 - 100</col>
+        <col id="1">$k$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Cyan as double 0.0 - 1.0</col>
+        <col id="1" translatable="yes">$c_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Magenta as double 0.0 - 1.0</col>
+        <col id="1" translatable="yes">$m_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Yellow as double 0.0 - 1.0</col>
+        <col id="1" translatable="yes">$y_d$</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Key as double 0.0 - 1.0</col>
+        <col id="1" translatable="yes">$k_d$</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkDialog" id="FormatEditWindow">
+    <property name="name">FormatEditWindow</property>
+    <property name="width_request">250</property>
+    <property name="height_request">250</property>
+    <property name="can_focus">False</property>
+    <property name="default_width">800</property>
+    <property name="default_height">500</property>
+    <property name="type_hint">dialog</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="CloseBtn">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="SaveBtn">
+                <property name="label">gtk-save</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkTextView" id="FormatTextView">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="VariablesTreeView">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">VariablesListStore</property>
+                    <property name="search_column">0</property>
+                    <property name="hover_selection">True</property>
+                    <property name="enable_grid_lines">both</property>
+                    <property name="enable_tree_lines">True</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn">
+                        <property name="title" translatable="yes">Variable</property>
+                        <property name="expand">True</property>
+                        <property name="clickable">True</property>
+                        <child>
+                          <object class="GtkCellRendererText"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn">
+                        <property name="title" translatable="yes">Description</property>
+                        <property name="expand">True</property>
+                        <property name="clickable">True</property>
+                        <child>
+                          <object class="GtkCellRendererText"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

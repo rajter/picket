@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Picket
+GenericName=Picket
+Exec=picket
+Icon=picket
+Terminal=false
+StartupNotify=true
+Categories=Graphics;GTK;
