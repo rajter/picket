@@ -41,6 +41,8 @@ picket
 *.glade#
 
 .vscode
+.idea
+cmake-build-debug
 todo.org
 logo.svg
 *.xcf
