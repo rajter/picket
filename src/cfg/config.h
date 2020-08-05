@@ -32,18 +32,18 @@ private:
 
 public:
 
-    int GetWidth() { return width; }
-    int GetHeight() { return height; }
-    int GetLastFormat() { return lastFormat; }
-    int GetScreenShotDelay() { return screenShotDelay; }
-    bool ShouldStartImmediatePick() { return startImmediatePick; }
-    bool ShouldCopyAfterPick() { return copyToClipboardAfterPick; }
-    bool ShouldQuitAfterPick() { return quitAfterPick; }
-    int GetPixelSize() { return pixelSize; }
-    int GetPixelsPerRow() { return pixelsPerRow; }
-    bool ShouldDisplayHexString() { return displayHexString; }
-    bool ShouldDisplayColorFormat() { return displayColorFormat; }
-    bool ShouldDisplayColorInfoBox() { return displayColorInfoBox; }
+    int GetWidth() const { return width; }
+    int GetHeight() const { return height; }
+    int GetLastFormat() const { return lastFormat; }
+    int GetScreenShotDelay() const { return screenShotDelay; }
+    bool ShouldStartImmediatePick() const { return startImmediatePick; }
+    bool ShouldCopyAfterPick() const { return copyToClipboardAfterPick; }
+    bool ShouldQuitAfterPick() const { return quitAfterPick; }
+    int GetPixelSize() const { return pixelSize; }
+    int GetPixelsPerRow() const { return pixelsPerRow; }
+    bool ShouldDisplayHexString() const { return displayHexString; }
+    bool ShouldDisplayColorFormat() const { return displayColorFormat; }
+    bool ShouldDisplayColorInfoBox() const { return displayColorInfoBox; }
 
     void SetWidth(int w) { width = w; }
     void SetHeight(int h) { height = h; }
