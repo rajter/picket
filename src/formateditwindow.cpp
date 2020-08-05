@@ -1,5 +1,6 @@
 #include <gtkmm.h>
 #include <iostream>
+#include <utility>
 #include "formateditwindow.h"
 
 using namespace std;
@@ -21,13 +22,11 @@ FormatEditWindow::~FormatEditWindow()
     delete saveButton;
     delete closeButton;
     delete formatTextView;
-
-    std::cout << "FormatEditWindow destructor called." << std::endl;
 }
 
 void FormatEditWindow::SetFormat(string formats)
 {
-    oldFormats = formats;
+    oldFormats = std::move(formats);
     formatTextBuffer->set_text(oldFormats);
     cout << oldFormats << endl;
 }

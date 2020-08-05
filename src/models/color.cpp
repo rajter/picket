@@ -1,11 +1,7 @@
 #include "color.h"
 #include "../utils/colorspace.cpp"
 #include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <algorithm>
 #include <vector>
-#include <math.h>
 
 using namespace std;
 using namespace DataUtilities;

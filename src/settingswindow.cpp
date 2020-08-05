@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "settingswindow.h"
 
 using namespace std;
@@ -36,13 +37,11 @@ SettingsWindow::~SettingsWindow()
     delete displayColorFormatCheckBox;
     delete displayColorInfoBoxCheckBox;
     delete screenshotDelaySpinButton;
-
-    std::cout << "SettingsWindow destructor called." << std::endl;
 }
 
 void SettingsWindow::SetConfig(shared_ptr<Config> cfg)
 {
-    config = cfg;
+    config = std::move(cfg);
 
     startImmediatePickCheckBox->set_active(config->ShouldStartImmediatePick());
     copyToClipboardAfterPickCheckBox->set_active(config->ShouldCopyAfterPick());

@@ -1,10 +1,8 @@
 #include <gtkmm.h>
 #include <iostream>
-#include <sstream>
-#include <fstream>
 #include <chrono>
 #include <thread>
-#include <unistd.h>
+#include <utility>
 #include "colorpickerwindow.h"
 #include "formateditwindow.h"
 #include "models/color.h"
@@ -99,7 +97,6 @@ MainWindow::~MainWindow()
     delete yellowScale;
     delete keyScale;
     delete formatComboBox;
-    std::cout << "MainWindow destructor called." << std::endl;
 }
 
 string MainWindow::CreateFormat()
@@ -123,12 +120,12 @@ void MainWindow::SaveConfiguration()
 
 void MainWindow::SetApp(Glib::RefPtr<Gtk::Application> _app)
 {
-    this->app = _app;
+    this->app = std::move(_app);
 }
 
 void MainWindow::SetConfig(shared_ptr<Config> cfg)
 {
-    config = cfg;
+    config = std::move(cfg);
 }
 
 void MainWindow::SetColorPickerWindow(ColorPickerWindow* _colorPickerWindow)
@@ -193,15 +190,15 @@ void MainWindow::SyncColorWithUi(const string &colorspace)
 {
     if(colorspace == "RGB")
     {
-        color.SetRGB(redScale->get_value(), greenScale->get_value(), blueScale->get_value(), rgbAlphaScale->get_value());
+        color.SetRGB(static_cast<int>(redScale->get_value()), static_cast<int>(greenScale->get_value()), static_cast<int>(blueScale->get_value()), static_cast<int>(rgbAlphaScale->get_value()));
     }
     else if(colorspace == "HSL")
     {
-        color.SetHSL(hueScale->get_value(), saturationScale->get_value(), lightnessScale->get_value());
+        color.SetHSL(static_cast<int>(hueScale->get_value()), static_cast<int>(saturationScale->get_value()), static_cast<int>(lightnessScale->get_value()));
     }
     else if(colorspace == "CMYK")
     {
-        color.SetCmyk(cyanScale->get_value(), magentaScale->get_value(), yellowScale->get_value(), keyScale->get_value());
+        color.SetCmyk(static_cast<int>(cyanScale->get_value()), static_cast<int>(magentaScale->get_value()), static_cast<int>(yellowScale->get_value()), static_cast<int>(keyScale->get_value()));
     }
 
     colorArea->queue_draw();

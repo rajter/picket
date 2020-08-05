@@ -1,6 +1,7 @@
 #include <gtkmm.h>
 #include <glib.h>
 #include <iostream>
+#include <utility>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/X.h>
@@ -9,7 +10,7 @@
 
 ColorPickerWindow::ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder): Gtk::Window(cobject)
 {
-    Display* display = XOpenDisplay(NULL);
+    Display* display = XOpenDisplay(nullptr);
     Screen*  defaultScreen = DefaultScreenOfDisplay(display);
 
     screenWidth = defaultScreen->width;
@@ -58,7 +59,7 @@ ColorPickerWindow::~ColorPickerWindow()
 
 void ColorPickerWindow::SetApp(Glib::RefPtr<Gtk::Application> _app)
 {
-    app = _app;
+    app = std::move(_app);
 }
 
 void ColorPickerWindow::SetMainWindow(MainWindow* _mainWindow)
@@ -68,7 +69,7 @@ void ColorPickerWindow::SetMainWindow(MainWindow* _mainWindow)
 
 void ColorPickerWindow::SetConfig(shared_ptr<Config> cfg)
 {
-    config = cfg;
+    config = std::move(cfg);
     pixelSize = config->GetPixelSize();
     pixelsPerRow = config->GetPixelsPerRow();
     CalculateMagnifierSize();
@@ -86,7 +87,7 @@ void ColorPickerWindow::TakeScreenshotFromXorg()
 {
     screenshot = Gdk::Pixbuf::create(Gdk::COLORSPACE_RGB, false, 8, screenWidth+outterBounds*2, screenHeight+outterBounds*2);
 
-    auto *display = XOpenDisplay(NULL);
+    auto *display = XOpenDisplay(nullptr);
     auto root = DefaultRootWindow(display);
 
     XImage *image = XGetImage(display,root, 0,0 , screenWidth, screenHeight, AllPlanes, ZPixmap);
@@ -97,19 +98,19 @@ void ColorPickerWindow::TakeScreenshotFromXorg()
     unsigned long green_mask = image->green_mask;
     unsigned long blue_mask = image->blue_mask;
 
-    for (int x = 0; x < screenWidth; x++)
+    for (int xScreen = 0; xScreen < screenWidth; xScreen++)
     {
-        for (int y = 0; y < screenHeight ; y++)
+        for (int yScreen = 0; yScreen < screenHeight ; yScreen++)
         {
-            unsigned long pixel = XGetPixel(image,x,y);
+            unsigned long pixel = XGetPixel(image, xScreen, yScreen);
 
             unsigned char blue = pixel & blue_mask;
             unsigned char green = (pixel & green_mask) >> 8;
             unsigned char red = (pixel & red_mask) >> 16;
 
-            array[(x + screenWidth * y) * 3] = red;
-            array[(x + screenWidth * y) * 3+1] = green;
-            array[(x + screenWidth * y) * 3+2] = blue;
+            array[(xScreen + screenWidth * yScreen) * 3] = red;
+            array[(xScreen + screenWidth * yScreen) * 3 + 1] = green;
+            array[(xScreen + screenWidth * yScreen) * 3 + 2] = blue;
         }
     }
 
@@ -336,10 +337,10 @@ void ColorPickerWindow::DrawColorInfoBox(const Cairo::RefPtr<Cairo::Context>& cr
     DrawingHelpers::DrawText(textX, textY, color.GetHexString(), "Monospace", textSize, Cairo::FONT_SLANT_NORMAL, Cairo::FONT_WEIGHT_BOLD, &textColor, cr);
 }
 
-void ColorPickerWindow::GetPixelFromPixbuf(double x, double y, Glib::RefPtr<Gdk::Pixbuf> pixbuf, unsigned char *pixels)
+void ColorPickerWindow::GetPixelFromPixbuf(double xPixel, double yPixel, const Glib::RefPtr<Gdk::Pixbuf> &pixbuf, unsigned char *pixels)
 {
     guchar *p;
-    p = pixels + ((int)y) * pixbuf->get_rowstride() + ((int)x) * pixbuf->get_n_channels();
+    p = pixels + ((int)yPixel) * pixbuf->get_rowstride() + ((int)xPixel) * pixbuf->get_n_channels();
 
     color.SetRGB((p[0]<<8) / 256, (p[1]<<8) / 256, (p[2]<<8) / 256);
 }

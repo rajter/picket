@@ -59,7 +59,7 @@ protected:
     bool on_my_motion_notify_event(GdkEventMotion* motion_event);
     bool on_scroll(GdkEventScroll* scroll_event);
 
-    void GetPixelFromPixbuf(double x, double y, Glib::RefPtr<Gdk::Pixbuf> pixbuf, unsigned char *pixels);
+    void GetPixelFromPixbuf(double xPixel, double yPixel, const Glib::RefPtr<Gdk::Pixbuf> &pixbuf, unsigned char *pixels);
 
 public:
     ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
