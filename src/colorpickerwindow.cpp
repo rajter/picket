@@ -9,16 +9,11 @@
 
 ColorPickerWindow::ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder): Gtk::Window(cobject)
 {
-    root = Gdk::Window::get_default_root_window();
+    Display* display = XOpenDisplay(NULL);
+    Screen*  defaultScreen = DefaultScreenOfDisplay(display);
 
-    auto *display = XOpenDisplay(NULL);
-    auto root = DefaultRootWindow(display);
-
-    XWindowAttributes gwa;
-
-    XGetWindowAttributes(display, root, &gwa);
-    screenWidth = gwa.width;
-    screenHeight = gwa.height;
+    screenWidth = defaultScreen->width;
+    screenHeight = defaultScreen->height;
 
     cout << "Screen: " << screenWidth << "x" << screenHeight << endl;
 
@@ -34,7 +29,7 @@ ColorPickerWindow::ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr
         cout << "Display Server: Wayland" << endl;
     }
 
-    GoFullscreen();
+    SetFullscreen();
 
     color = Color(0,0,0);
 
@@ -54,6 +49,11 @@ ColorPickerWindow::ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr
     drawingArea->signal_draw().connect(sigc::mem_fun(this, &ColorPickerWindow::on_my_draw));
     drawingArea->signal_motion_notify_event().connect(sigc::mem_fun(this, &ColorPickerWindow::on_my_motion_notify_event));
     drawingArea->add_events(Gdk::KEY_PRESS_MASK | Gdk::POINTER_MOTION_MASK | Gdk::BUTTON_PRESS_MASK);
+}
+
+ColorPickerWindow::~ColorPickerWindow()
+{
+    delete drawingArea;
 }
 
 void ColorPickerWindow::SetApp(Glib::RefPtr<Gtk::Application> _app)
@@ -145,7 +145,7 @@ void ColorPickerWindow::TakeScreenshotFromWayland()
     cout << "Wayland screenshot." << endl;
 }
 
-void ColorPickerWindow::GoFullscreen()
+void ColorPickerWindow::SetFullscreen()
 {
     this->fullscreen();
     this->set_size_request(screenWidth, screenHeight);

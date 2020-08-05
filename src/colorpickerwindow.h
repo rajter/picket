@@ -11,13 +11,10 @@ class MainWindow;
 class ColorPickerWindow : public Gtk::Window
 {
 private:
-    Glib::RefPtr<Gdk::Window> root;
     int screenWidth = 0;
     int screenHeight = 0;
     int x = 0;
     int y = 0;
-    int magnifierX = 0;
-    int magnifierY = 0;
     DisplayServer displayServer = DisplayServer::x11;
 
     Color color;
@@ -37,7 +34,7 @@ private:
     void TakeScreenshot();
     void TakeScreenshotFromXorg();
     void TakeScreenshotFromWayland();
-    void GoFullscreen();
+    void SetFullscreen();
     void GrabAndHideCursor();
     void SetInitialXAndY();
     void ChangePixelsPerRow(int change);
@@ -51,7 +48,6 @@ private:
 
 protected:
     Glib::RefPtr<Gtk::Application> app;
-    Gtk::Window *window;
     Gtk::DrawingArea *drawingArea;
     Glib::RefPtr<Gdk::Pixbuf> screenshot;
     MainWindow *mainWindow;
@@ -67,6 +63,8 @@ protected:
 
 public:
     ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
+    ~ColorPickerWindow();
+
     void SetApp(Glib::RefPtr<Gtk::Application> _app);
     void SetMainWindow(MainWindow* _mainWindow);
     void SetConfig(shared_ptr<Config> cfg);
