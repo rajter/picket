@@ -1,6 +1,4 @@
 #include <gtkmm.h>
-#include <unistd.h>
-#include <sys/stat.h>
 #include "colorpickerwindow.h"
 #include "mainwindow.h"
 #include "formateditwindow.h"
@@ -10,15 +8,15 @@
 
 using namespace std;
 
-Config config;
-MainWindow *window;
-ColorPickerWindow *colorPickerWindow;
-SettingsWindow *settingsWindow;
-FormatEditWindow *formatEditWindow;
-string userDirectory = (string)getenv("HOME")+"/.picket";
-
 int main(int argc, char *argv[])
 {
+    Config config;
+    MainWindow *window;
+    ColorPickerWindow *colorPickerWindow;
+    SettingsWindow *settingsWindow;
+    FormatEditWindow *formatEditWindow;
+    string userDirectory = (string)getenv("HOME")+"/.picket";
+
     if(!DirUtilities::DirectoryExists(userDirectory))
         DirUtilities::CreateUserDirectory(userDirectory);
 

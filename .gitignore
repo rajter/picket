@@ -43,6 +43,7 @@ picket
 .vscode
 .idea
 cmake-build-debug
+cmake-build-release
 todo.org
 logo.svg
 *.xcf

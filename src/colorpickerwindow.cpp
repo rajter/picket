@@ -1,13 +1,11 @@
 #include <gtkmm.h>
 #include <glib.h>
 #include <iostream>
-#include <sstream>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/X.h>
 #include "colorpickerwindow.h"
 #include "utils/drawinghelpers.cpp"
-
 
 ColorPickerWindow::ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder): Gtk::Window(cobject)
 {
