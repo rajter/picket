@@ -117,13 +117,19 @@ Arch User Repositories https://aur.archlinux.org/packages/picket/
 
 ## Manual Install
 
-Clone the repository to your local machine.
-Execute `make` to build the program and `sudo make install` to install it on your machine.
+Clone the repository to your local machine. `git clone https://github.com/rajter/Picket.git`  
+Change directory to Picket `cd Picket`  
+Create directory "build" `mkdir build`  
+Change directory to build `cd build`  
+Execute cmake for Release build `cmake -DCMAKE_BUILD_TYPE=Release ..`    
+Execute `sudo make install` to build and install it on your machine.
 
 ```shell
   git clone https://github.com/rajter/Picket.git
   cd Picket
-  make
+  mkdir build
+  cd build
+  cmake -DCMAKE_BUILD_TYPE=Release ..
   sudo make install
 ```
 ### Prerequisites
