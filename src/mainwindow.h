@@ -25,7 +25,6 @@ private:
 
     string CreateFormat();
     void SaveConfiguration();
-    void LoadConfiguration();
     ColorFormatManager colorFormatManager = ColorFormatManager((string)getenv("HOME")+"/.picket/formats");
 
     sigc::connection redScaleSignal;
@@ -66,6 +65,7 @@ protected:
 
 public:
     MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
+    ~MainWindow();
 
     void Show(int response);
     void SetApp(Glib::RefPtr<Gtk::Application> _app);

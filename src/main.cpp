@@ -53,5 +53,10 @@ int main(int argc, char *argv[])
     else
         app->run(*window);
 
+    delete window;
+    delete settingsWindow;
+    delete colorPickerWindow;
+    delete formatEditWindow;
+
     return 0;
 }

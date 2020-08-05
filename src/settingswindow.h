@@ -23,6 +23,7 @@ private:
 
 public:
     SettingsWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
+     ~SettingsWindow();
 
     void SetConfig(Config* cfg);
 

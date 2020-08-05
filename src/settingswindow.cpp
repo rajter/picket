@@ -25,6 +25,21 @@ SettingsWindow::SettingsWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::
     screenshotDelaySpinButton->set_increments(50,50);
 }
 
+SettingsWindow::~SettingsWindow()
+{
+    delete saveButton;
+    delete closeButton;
+    delete startImmediatePickCheckBox;
+    delete copyToClipboardAfterPickCheckBox;
+    delete quitAfterPickCheckBox;
+    delete displayHexStringCheckBox;
+    delete displayColorFormatCheckBox;
+    delete displayColorInfoBoxCheckBox;
+    delete screenshotDelaySpinButton;
+
+    std::cout << "SettingsWindow destructor called." << std::endl;
+}
+
 void SettingsWindow::SetConfig(Config* cfg)
 {
     config = cfg;

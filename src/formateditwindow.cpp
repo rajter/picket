@@ -16,6 +16,15 @@ FormatEditWindow::FormatEditWindow(BaseObjectType* cobject, const Glib::RefPtr<G
     closeButton->signal_clicked().connect(sigc::mem_fun(this, &FormatEditWindow::on_closeButton_clicked) );
 }
 
+FormatEditWindow::~FormatEditWindow()
+{
+    delete saveButton;
+    delete closeButton;
+    delete formatTextView;
+
+    std::cout << "FormatEditWindow destructor called." << std::endl;
+}
+
 void FormatEditWindow::SetFormat(string formats)
 {
     oldFormats = formats;

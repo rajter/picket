@@ -9,9 +9,9 @@ class FormatEditWindow : public Gtk::Dialog
 {
 private:
     MainWindow* mainWindow;
-    Gtk::Button *saveButton;
-    Gtk::Button *closeButton;
-    Gtk::TextView *formatTextView;
+    Gtk::Button* saveButton;
+    Gtk::Button* closeButton;
+    Gtk::TextView* formatTextView;
     Glib::RefPtr<Gtk::TextBuffer> formatTextBuffer;
 
     string oldFormats;
@@ -19,6 +19,7 @@ private:
 
 public:
     FormatEditWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
+    ~FormatEditWindow();
 
     void SetFormat(string formats);
     string GetFormat();

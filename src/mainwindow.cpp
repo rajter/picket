@@ -78,6 +78,30 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     color = Color(0,0,0);
 }
 
+MainWindow::~MainWindow()
+{
+    delete exitBtn;
+    delete settingsBtn;
+    delete colorPickerBtn;
+    delete editBtn;
+    delete clipboardBtn;
+    delete colorArea;
+    delete redScale;
+    delete greenScale;
+    delete blueScale;
+    delete rgbAlphaScale;
+    delete hslAlphaScale;
+    delete hueScale;
+    delete saturationScale;
+    delete lightnessScale;
+    delete cyanScale;
+    delete magentaScale;
+    delete yellowScale;
+    delete keyScale;
+    delete formatComboBox;
+    std::cout << "MainWindow destructor called." << std::endl;
+}
+
 string MainWindow::CreateFormat()
 {
     colorFormatManager.SetVariables(color.GetVariables());
