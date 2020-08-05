@@ -66,7 +66,7 @@ void ColorPickerWindow::SetMainWindow(MainWindow* _mainWindow)
     mainWindow = _mainWindow;
 }
 
-void ColorPickerWindow::SetConfig(Config* cfg)
+void ColorPickerWindow::SetConfig(shared_ptr<Config> cfg)
 {
     config = cfg;
     pixelSize = config->GetPixelSize();

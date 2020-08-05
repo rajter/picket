@@ -21,7 +21,7 @@ private:
     DisplayServer displayServer = DisplayServer::x11;
 
     Color color;
-    Config* config;
+    shared_ptr<Config> config;
 
     int minPixelSize = 2;
     int maxPixelSize = 15;
@@ -69,5 +69,5 @@ public:
     ColorPickerWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
     void SetApp(Glib::RefPtr<Gtk::Application> _app);
     void SetMainWindow(MainWindow* _mainWindow);
-    void SetConfig(Config* cfg);
+    void SetConfig(shared_ptr<Config> cfg);
 };

@@ -40,7 +40,7 @@ SettingsWindow::~SettingsWindow()
     std::cout << "SettingsWindow destructor called." << std::endl;
 }
 
-void SettingsWindow::SetConfig(Config* cfg)
+void SettingsWindow::SetConfig(shared_ptr<Config> cfg)
 {
     config = cfg;
 

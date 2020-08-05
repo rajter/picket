@@ -126,7 +126,7 @@ void MainWindow::SetApp(Glib::RefPtr<Gtk::Application> _app)
     this->app = _app;
 }
 
-void MainWindow::SetConfig(Config* cfg)
+void MainWindow::SetConfig(shared_ptr<Config> cfg)
 {
     config = cfg;
 }

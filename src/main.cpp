@@ -1,4 +1,5 @@
 #include <gtkmm.h>
+#include <memory>
 #include "colorpickerwindow.h"
 #include "mainwindow.h"
 #include "formateditwindow.h"
@@ -10,7 +11,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Config config;
     MainWindow *window;
     ColorPickerWindow *colorPickerWindow;
     SettingsWindow *settingsWindow;
@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     if(!DirUtilities::DirectoryExists(userDirectory))
         DirUtilities::CreateUserDirectory(userDirectory);
 
-    config = Config();
-    config.LoadConfiguration();
+    shared_ptr<Config> config = make_shared<Config>();
+    config->LoadConfiguration();
 
     auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
     auto mainWinBuilder = Gtk::Builder::create_from_file("/usr/share/picket/MainWindow.glade");
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     formatEditWindowBuilder->get_widget_derived("FormatEditWindow", formatEditWindow);
 
     window->SetApp(app);
-    window->SetConfig(&config);
+    window->SetConfig(config);
     window->InitColorFormatManager();
     window->PopulateComboWithFormats();
     window->SetColorPickerWindow(colorPickerWindow);
@@ -43,12 +43,12 @@ int main(int argc, char *argv[])
 
     colorPickerWindow->SetApp(app);
     colorPickerWindow->SetMainWindow(window);
-    colorPickerWindow->SetConfig(&config);
+    colorPickerWindow->SetConfig(config);
 
-    settingsWindow->SetConfig(&config);
+    settingsWindow->SetConfig(config);
     window->SetSettingsWindow(settingsWindow);
 
-    if(config.ShouldStartImmediatePick())
+    if(config->ShouldStartImmediatePick())
         app->run(*colorPickerWindow);
     else
         app->run(*window);

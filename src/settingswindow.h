@@ -9,7 +9,7 @@ class MainWindow;
 class SettingsWindow : public Gtk::Dialog
 {
 private:
-    Config* config;
+    shared_ptr<Config> config;
     MainWindow* mainWindow;
     Gtk::Button *saveButton;
     Gtk::Button *closeButton;
@@ -25,7 +25,7 @@ public:
     SettingsWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
      ~SettingsWindow();
 
-    void SetConfig(Config* cfg);
+    void SetConfig(shared_ptr<Config> cfg);
 
     void on_saveButton_clicked();
     void on_closeButton_clicked();

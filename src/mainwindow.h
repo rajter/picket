@@ -18,7 +18,7 @@ class MainWindow : public Gtk::Window
 {
 private:
     Color color;
-    Config* config;
+    shared_ptr<Config> config;
     ColorPickerWindow *colorPickerWindow;
     SettingsWindow *settingsWindow;
     FormatEditWindow *formatEditWindow;
@@ -69,7 +69,7 @@ public:
 
     void Show(int response);
     void SetApp(Glib::RefPtr<Gtk::Application> _app);
-    void SetConfig(Config* cfg);
+    void SetConfig(shared_ptr<Config> cfg);
     void SetColorPickerWindow(ColorPickerWindow* _colorPickerWindow);
     void SetSettingsWindow(SettingsWindow* _settingsWindow);
     void SetFormatEditWindow(FormatEditWindow* _formatEditWindow);
