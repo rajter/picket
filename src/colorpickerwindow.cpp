@@ -383,6 +383,9 @@ void ColorPickerWindow::Redraw()
 
 void ColorPickerWindow::FinishPick(bool takeColor)
 {
+    app->hold();
+    close();
+
     auto display = this->get_display();
     display->get_default_seat()->ungrab();
 
@@ -398,7 +401,4 @@ void ColorPickerWindow::FinishPick(bool takeColor)
     {
         mainWindow->Show(Gtk::RESPONSE_CANCEL);
     }
-
-    app->hold();
-    close();
 }

@@ -17,6 +17,7 @@ using namespace std;
 class MainWindow : public Gtk::Window
 {
 private:
+    bool showColorPickerWindow = false;
     Color color;
     shared_ptr<Config> config;
     ColorPickerWindow *colorPickerWindow;
@@ -92,4 +93,5 @@ public:
     void on_cmyk_color_changed();
     void on_format_changed();
     bool on_key_pressed(GdkEventKey* event);
+    bool on_window_state(GdkEventWindowState *window_state_event);
 };

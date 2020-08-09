@@ -70,6 +70,7 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     formatComboBox->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_format_changed));
 
     signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_key_pressed), false);
+    signal_window_state_event().connect(sigc::mem_fun(this, &MainWindow::on_window_state), false);
 
     set_title("Picket");
     set_size_request(100, 350);
@@ -317,10 +318,8 @@ void MainWindow::on_settingsButton_clicked()
 
 void MainWindow::on_colorPickerButton_clicked()
 {
+    showColorPickerWindow = true;
     iconify();
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(config->GetScreenShotDelay()));
-    colorPickerWindow->present();
 }
 
 void MainWindow::on_clipboardButton_clicked()
@@ -404,6 +403,21 @@ bool MainWindow::on_key_pressed(GdkEventKey* event)
             break;
         default:
             break;
+    }
+
+    return true;
+}
+
+bool MainWindow::on_window_state(GdkEventWindowState *window_state_event)
+{
+    if((window_state_event->changed_mask & GdkWindowState::GDK_WINDOW_STATE_ICONIFIED) == GdkWindowState::GDK_WINDOW_STATE_ICONIFIED)
+    {
+        if(showColorPickerWindow)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(config->GetScreenShotDelay()));
+            colorPickerWindow->present();
+            showColorPickerWindow = false;
+        }
     }
 
     return true;
