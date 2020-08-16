@@ -15,7 +15,11 @@ private:
     int screenHeight = 0;
     int x = 0;
     int y = 0;
+    int magOffset = 0;
+    int infoWidth = 200;
+    int infoHeight = 75;
     DisplayServer displayServer = DisplayServer::x11;
+    MagnifierPosition magPos = MagnifierPosition::RightDown;
 
     Color color;
     shared_ptr<Config> config;
@@ -35,7 +39,6 @@ private:
     void TakeScreenshotFromXorg();
     void TakeScreenshotFromWayland();
     void SetFullscreen();
-    void GrabAndHideCursor();
     void SetInitialXAndY();
     void ChangePixelsPerRow(int change);
     void ChangePixelSize(int change);

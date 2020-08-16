@@ -152,15 +152,6 @@ void ColorPickerWindow::SetFullscreen()
     this->set_size_request(screenWidth, screenHeight);
 }
 
-void ColorPickerWindow::GrabAndHideCursor()
-{
-    this->set_modal(true);
-    auto display = this->get_display();
-    auto window = this->get_window();
-    auto screen = this->get_screen();
-    display->get_default_seat()->grab(window, Gdk::SEAT_CAPABILITY_ALL, true, Gdk::Cursor::create(display, Gdk::BLANK_CURSOR));
-}
-
 void ColorPickerWindow::SetInitialXAndY()
 {
     auto display = this->get_display();
@@ -177,7 +168,6 @@ void ColorPickerWindow::SetInitialXAndY()
 void ColorPickerWindow::on_showed()
 {
     TakeScreenshot();
-    GrabAndHideCursor();
     SetInitialXAndY();
 }
 
@@ -280,19 +270,58 @@ void ColorPickerWindow::DrawScreenshot(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void ColorPickerWindow::DrawMagnifier(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-    // draw magnified image
+    // scale magnifier image
     Glib::RefPtr<Gdk::Pixbuf> subImage = Gdk::Pixbuf::create_subpixbuf(screenshot, x+outterBounds-pixelsPerRow/2, y+outterBounds-pixelsPerRow/2, pixelsPerRow, pixelsPerRow);
     Glib::RefPtr<Gdk::Pixbuf> scaledImage = subImage->scale_simple(magnifierSize, magnifierSize, Gdk::INTERP_NEAREST);
-    Gdk::Cairo::set_source_pixbuf(cr, scaledImage, x-magnifierSize/2, y-magnifierSize/2);
-    cr->rectangle(x-magnifierSize/2,y-magnifierSize/2,magnifierSize,magnifierSize);
+
+    // calculate magnifier offset
+    magOffset = magnifierSize/2 + 25;
+
+    // draw magnified image
+    int magX = x+magOffset;
+    int magY = y+magOffset;
+
+    // magnifier + info box
+    int magInfoWidth = (config->ShouldDisplayColorInfoBox() && infoWidth > magnifierSize) ? infoWidth : magnifierSize;
+    int magInfoHeight = config->ShouldDisplayColorInfoBox() ? magnifierSize + infoHeight: magnifierSize;
+
+    if((magX+magInfoWidth/2) > screenWidth)
+    {
+        magX = x-magOffset;
+    }
+    if((y + 50 + magInfoHeight) > screenHeight)
+    {
+        magY = y-magOffset;
+    }
+
+    // Get Magnifier Position
+    if(magX > x && magY > y)
+    {
+        magPos = MagnifierPosition::RightDown;
+    }
+    else if(magX < x && magY > y)
+    {
+        magPos = MagnifierPosition::LeftDown;
+    }
+    else if(magX < x && magY < y)
+    {
+        magPos = MagnifierPosition::LeftUp;
+    }
+    else
+    {
+        magPos = MagnifierPosition::RightUp;
+    }
+
+    Gdk::Cairo::set_source_pixbuf(cr, scaledImage, magX-magnifierSize/2, magY-magnifierSize/2);
+    cr->rectangle(magX-magnifierSize/2,magY-magnifierSize/2,magnifierSize,magnifierSize);
     cr->fill();
 
     // draw magnifier outline
-    DrawingHelpers::DrawRectangleOutline(x, y, magnifierSize, magnifierSize, cr);
+    DrawingHelpers::DrawRectangleOutline(magX, magY, magnifierSize, magnifierSize, cr);
 
     // draw center pixel
-    DrawingHelpers::FillCenterRectangle(x, y, pixelSize, pixelSize, &color, cr);
-    DrawingHelpers::DrawRectangleOutline(x, y, pixelSize, pixelSize, cr);
+    DrawingHelpers::FillCenterRectangle(magX, magY, pixelSize, pixelSize, &color, cr);
+    DrawingHelpers::DrawRectangleOutline(magX, magY, pixelSize, pixelSize, cr);
 }
 
 void ColorPickerWindow::DrawColorInfoBox(const Cairo::RefPtr<Cairo::Context>& cr)
@@ -300,20 +329,22 @@ void ColorPickerWindow::DrawColorInfoBox(const Cairo::RefPtr<Cairo::Context>& cr
     // calculate variables for info text
     auto backColor = Color(0,0,0,175);
     auto textColor = Color(255,255,255,255);
-    int infoX = x;
-    int infoY = y+magnifierSize/2+50;
 
-    if(infoY+(75/2) > screenHeight)
+    int infoX = x + magOffset;
+    int infoY = y + magOffset + magnifierSize/2+50;
+
+    if(magPos == MagnifierPosition::LeftDown)
     {
-        infoY = y-magnifierSize/2-50;
+        infoX = x - magOffset;
     }
-    if((x-100) < 0)
+    else if(magPos == MagnifierPosition::LeftUp)
     {
-        infoX = x+(100-x);
+        infoX = x - magOffset;
+        infoY = y - (magOffset + magnifierSize/2+50);
     }
-    if((x+100) > screenWidth)
+    else if(magPos == MagnifierPosition::RightUp)
     {
-        infoX = x-(100-(screenWidth-x));
+        infoY = y - (magOffset + magnifierSize/2+50);
     }
 
     int textSize = 16;
@@ -321,7 +352,7 @@ void ColorPickerWindow::DrawColorInfoBox(const Cairo::RefPtr<Cairo::Context>& cr
     int textY = infoY+textSize*2-2;
 
     // draw transparent background rectangle
-    DrawingHelpers::FillCenterRectangle(infoX, infoY, 200, 75, &backColor, cr);
+    DrawingHelpers::FillCenterRectangle(infoX, infoY, infoWidth, infoHeight, &backColor, cr);
 
     // draw center color rectangle
     DrawingHelpers::FillCenterRectangle(infoX-60, infoY, 60, 60, &color, cr);
