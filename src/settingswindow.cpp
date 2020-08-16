@@ -24,6 +24,8 @@ SettingsWindow::SettingsWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::
 
     screenshotDelaySpinButton->set_range(0,5000);
     screenshotDelaySpinButton->set_increments(50,50);
+
+    displayColorInfoBoxCheckBox->signal_toggled().connect(sigc::mem_fun(this, &SettingsWindow::on_showInfoBox_toggled));
 }
 
 SettingsWindow::~SettingsWindow()
@@ -68,4 +70,13 @@ void SettingsWindow::on_saveButton_clicked()
 void SettingsWindow::on_closeButton_clicked()
 {
     response(Gtk::RESPONSE_CANCEL);
+}
+
+void SettingsWindow::on_showInfoBox_toggled()
+{
+    bool displayColorInfoBox = displayColorInfoBoxCheckBox->get_active();
+    displayColorFormatCheckBox->set_sensitive(displayColorInfoBox);
+    displayColorFormatCheckBox->set_active(displayColorInfoBox);
+    displayHexStringCheckBox->set_sensitive(displayColorInfoBox);
+    displayHexStringCheckBox->set_active(displayColorInfoBox);
 }

@@ -29,4 +29,5 @@ public:
 
     void on_saveButton_clicked();
     void on_closeButton_clicked();
+    void on_showInfoBox_toggled();
 };

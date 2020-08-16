@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkTextBuffer" id="LicenceTextBuffer">
@@ -92,9 +92,6 @@ SOFTWARE.</property>
     <property name="window_position">center-always</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -264,8 +261,8 @@ SOFTWARE.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="Display1CheckBox">
-                    <property name="label" translatable="yes">Display hex string</property>
+                  <object class="GtkCheckButton" id="Display3CheckBox">
+                    <property name="label" translatable="yes">Display color info box</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -279,8 +276,8 @@ SOFTWARE.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="Display2CheckBox">
-                    <property name="label" translatable="yes">Display color format</property>
+                  <object class="GtkCheckButton" id="Display1CheckBox">
+                    <property name="label" translatable="yes">Display hex string</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -294,8 +291,8 @@ SOFTWARE.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkCheckButton" id="Display3CheckBox">
-                    <property name="label" translatable="yes">Display color info box</property>
+                  <object class="GtkCheckButton" id="Display2CheckBox">
+                    <property name="label" translatable="yes">Display color format</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -483,6 +480,9 @@ SOFTWARE.</property>
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
 </interface>
