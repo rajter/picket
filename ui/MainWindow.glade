@@ -768,7 +768,7 @@
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="icon-name">insert-object</property>
+                <property name="icon-name">color-select</property>
               </object>
             </child>
           </object>

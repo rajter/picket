@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.36.0 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkTextBuffer" id="LicenceTextBuffer">
@@ -39,15 +39,15 @@ SOFTWARE.</property>
       </row>
       <row>
         <col id="0" translatable="yes">Starts the picker</col>
-        <col id="1" translatable="yes">SPACE or p</col>
+        <col id="1" translatable="yes">CTRL + SPACE or p</col>
       </row>
       <row>
         <col id="0" translatable="yes">Copy to clipboard</col>
-        <col id="1" translatable="yes">TAB</col>
+        <col id="1" translatable="yes">CTRL + C</col>
       </row>
       <row>
         <col id="0" translatable="yes">Quit. Exit application. </col>
-        <col id="1" translatable="yes">q</col>
+        <col id="1" translatable="yes">CTRL + q</col>
       </row>
       <row>
         <col id="0" translatable="yes">COLOR PICKER</col>
@@ -85,29 +85,29 @@ SOFTWARE.</property>
   </object>
   <object class="GtkDialog" id="SettingsWindow">
     <property name="name">SettingsWindow</property>
-    <property name="width_request">350</property>
-    <property name="height_request">300</property>
-    <property name="can_focus">False</property>
+    <property name="width-request">350</property>
+    <property name="height-request">300</property>
+    <property name="can-focus">False</property>
     <property name="modal">True</property>
-    <property name="window_position">center-always</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
+    <property name="window-position">center-always</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="type-hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox">
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
             <child>
               <object class="GtkButton" id="CloseBtn">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -119,9 +119,9 @@ SOFTWARE.</property>
               <object class="GtkButton" id="SaveBtn">
                 <property name="label">gtk-save</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -139,20 +139,20 @@ SOFTWARE.</property>
         <child>
           <object class="GtkNotebook">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can-focus">True</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">10</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">10</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">start</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_bottom">5</property>
+                    <property name="margin-left">5</property>
+                    <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">Pick Settings</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -168,10 +168,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Pick1CheckBox">
                     <property name="label" translatable="yes">Start immediate pick</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -183,10 +183,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Pick2CheckBox">
                     <property name="label" translatable="yes">Copy to clipboard after pick</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -198,10 +198,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Pick3CheckBox">
                     <property name="label" translatable="yes">Quit after pick</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -212,15 +212,15 @@ SOFTWARE.</property>
                 <child>
                   <object class="GtkSpinButton" id="ScreenShotDelaySpinButton">
                     <property name="name">ScreenShotDelaySpinButton</property>
-                    <property name="width_request">150</property>
+                    <property name="width-request">150</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                     <property name="halign">center</property>
                     <property name="text" translatable="yes">0</property>
-                    <property name="caps_lock_warning">False</property>
-                    <property name="primary_icon_activatable">False</property>
-                    <property name="input_purpose">number</property>
-                    <property name="climb_rate">50</property>
+                    <property name="caps-lock-warning">False</property>
+                    <property name="primary-icon-activatable">False</property>
+                    <property name="input-purpose">number</property>
+                    <property name="climb-rate">50</property>
                     <property name="numeric">True</property>
                   </object>
                   <packing>
@@ -232,7 +232,7 @@ SOFTWARE.</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Delay before start of pick process</property>
                   </object>
                   <packing>
@@ -244,11 +244,11 @@ SOFTWARE.</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="halign">start</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_top">5</property>
-                    <property name="margin_bottom">5</property>
+                    <property name="margin-left">5</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">Display</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -264,10 +264,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Display3CheckBox">
                     <property name="label" translatable="yes">Display color info box</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -279,10 +279,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Display1CheckBox">
                     <property name="label" translatable="yes">Display hex string</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -294,10 +294,10 @@ SOFTWARE.</property>
                   <object class="GtkCheckButton" id="Display2CheckBox">
                     <property name="label" translatable="yes">Display color format</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-left">10</property>
+                    <property name="draw-indicator">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -310,28 +310,28 @@ SOFTWARE.</property>
             <child type="tab">
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Settings</property>
               </object>
               <packing>
-                <property name="tab_expand">True</property>
-                <property name="tab_fill">False</property>
+                <property name="tab-expand">True</property>
+                <property name="tab-fill">False</property>
               </packing>
             </child>
             <child>
               <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="shadow_type">in</property>
+                <property name="can-focus">True</property>
+                <property name="shadow-type">in</property>
                 <child>
                   <object class="GtkTreeView" id="ShortcutsTreeView">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                     <property name="model">ShortcutsListStore</property>
-                    <property name="search_column">0</property>
-                    <property name="hover_selection">True</property>
-                    <property name="enable_grid_lines">both</property>
-                    <property name="enable_tree_lines">True</property>
+                    <property name="search-column">0</property>
+                    <property name="hover-selection">True</property>
+                    <property name="enable-grid-lines">both</property>
+                    <property name="enable-tree-lines">True</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection"/>
                     </child>
@@ -371,29 +371,29 @@ SOFTWARE.</property>
             <child type="tab">
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Shortcuts</property>
               </object>
               <packing>
                 <property name="position">1</property>
-                <property name="tab_fill">False</property>
+                <property name="tab-fill">False</property>
               </packing>
             </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkImage">
-                    <property name="width_request">100</property>
-                    <property name="height_request">100</property>
+                    <property name="width-request">100</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_top">10</property>
-                    <property name="margin_bottom">10</property>
-                    <property name="pixel_size">100</property>
-                    <property name="icon_name">picket</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-bottom">10</property>
+                    <property name="pixel-size">100</property>
+                    <property name="icon-name">picket</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -404,7 +404,7 @@ SOFTWARE.</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Picket</property>
                   </object>
                   <packing>
@@ -416,7 +416,7 @@ SOFTWARE.</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Screen color picker.</property>
                   </object>
                   <packing>
@@ -433,27 +433,27 @@ SOFTWARE.</property>
             <child type="tab">
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">About</property>
               </object>
               <packing>
                 <property name="position">2</property>
-                <property name="tab_fill">False</property>
+                <property name="tab-fill">False</property>
               </packing>
             </child>
             <child>
               <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="shadow_type">in</property>
+                <property name="can-focus">True</property>
+                <property name="shadow-type">in</property>
                 <child>
                   <object class="GtkTextView">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
+                    <property name="can-focus">True</property>
                     <property name="editable">False</property>
-                    <property name="cursor_visible">False</property>
+                    <property name="cursor-visible">False</property>
                     <property name="buffer">LicenceTextBuffer</property>
-                    <property name="accepts_tab">False</property>
+                    <property name="accepts-tab">False</property>
                   </object>
                 </child>
               </object>
@@ -464,12 +464,12 @@ SOFTWARE.</property>
             <child type="tab">
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Licence</property>
               </object>
               <packing>
                 <property name="position">3</property>
-                <property name="tab_fill">False</property>
+                <property name="tab-fill">False</property>
               </packing>
             </child>
           </object>
@@ -480,9 +480,6 @@ SOFTWARE.</property>
           </packing>
         </child>
       </object>
-    </child>
-    <child type="titlebar">
-      <placeholder/>
     </child>
   </object>
 </interface>
