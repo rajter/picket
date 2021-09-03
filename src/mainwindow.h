@@ -7,6 +7,7 @@
 #include "models/color.h"
 #include "models/colorformatmanager.h"
 #include "cfg/config.h"
+#include "utils/enums.h"
 
 class ColorPickerWindow;
 class SettingsWindow;
@@ -32,37 +33,64 @@ private:
     sigc::connection greenScaleSignal;
     sigc::connection blueScaleSignal;
     sigc::connection rgbAlphaScaleSignal;
-    sigc::connection hslAlphaScaleSignal;
     sigc::connection hueScaleSignal;
     sigc::connection saturationScaleSignal;
     sigc::connection lightnessScaleSignal;
+    sigc::connection hslAlphaScaleSignal;
     sigc::connection cyanScaleSignal;
     sigc::connection magentaScaleSignal;
     sigc::connection yellowScaleSignal;
     sigc::connection keyScaleSignal;
 
+    sigc::connection redEntrySignal;
+    sigc::connection greenEntrySignal;
+    sigc::connection blueEntrySignal;
+    sigc::connection rgbAlphaEntrySignal;
+    sigc::connection hueEntrySignal;
+    sigc::connection saturationEntrySignal;
+    sigc::connection lightnessEntrySignal;
+    sigc::connection hslAlphaEntrySignal;
+    sigc::connection cyanEntrySignal;
+    sigc::connection magentaEntrySignal;
+    sigc::connection yellowEntrySignal;
+    sigc::connection keyEntrySignal;
+
 protected:
     Glib::RefPtr<Gtk::Application> app;
-    Gtk::ToolButton *exitBtn;
-    Gtk::ToolButton *settingsBtn;
-    Gtk::ToolButton *colorPickerBtn;
-    Gtk::Button *editBtn;
-    Gtk::Button *clipboardBtn;
     Gtk::Window *window;
     Gtk::DrawingArea *colorArea;
+
+    Gtk::Button *settingsBtn;
+    Gtk::Button *colorPickerBtn;
+    Gtk::Button *editBtn;
+    Gtk::Button *clipboardBtn;
+    Gtk::ComboBoxText *formatComboBox;
+
     Gtk::Scale *redScale;
     Gtk::Scale *greenScale;
     Gtk::Scale *blueScale;
     Gtk::Scale *rgbAlphaScale;
-    Gtk::Scale *hslAlphaScale;
     Gtk::Scale *hueScale;
     Gtk::Scale *saturationScale;
     Gtk::Scale *lightnessScale;
+    Gtk::Scale *hslAlphaScale;
     Gtk::Scale *cyanScale;
     Gtk::Scale *magentaScale;
     Gtk::Scale *yellowScale;
     Gtk::Scale *keyScale;
-    Gtk::ComboBoxText *formatComboBox;
+
+    Gtk::Entry *redEntry;
+    Gtk::Entry *greenEntry;
+    Gtk::Entry *blueEntry;
+    Gtk::Entry *alphaEntry;
+    Gtk::Entry *hueEntry;
+    Gtk::Entry *saturationEntry;
+    Gtk::Entry *lightnessEntry;
+    Gtk::Entry *hslAlphaEntry;
+    Gtk::Entry *cyanEntry;
+    Gtk::Entry *magentaEntry;
+    Gtk::Entry *yellowEntry;
+    Gtk::Entry *keyEntry;
 
 public:
     MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
@@ -77,10 +105,12 @@ public:
     void SetPickedColor(Color pickedColor);
     void PopulateComboWithFormats();
     void InitColorFormatManager();
-    void SyncColorWithUi(const string &colorspace);
-    void SyncUiWithColor(Color syncColor);
+    void SyncColorWithUi(ColorSpace colorspace, UiEditType editType);
+    void SyncUiWithColor(Color syncColor, UiEditType editType);
     void BlockUiSignals();
     void UnblockUiSignals();
+    void SanitizeEntryInputs(ColorSpace colorspace);
+    void SanitizeEntryInput(Gtk::Entry *entry);
 
     bool on_colorArea_draw(const Cairo::RefPtr<Cairo::Context>& cr);
     void on_exitButton_clicked();
@@ -94,4 +124,7 @@ public:
     void on_format_changed();
     bool on_key_pressed(GdkEventKey* event);
     bool on_window_state(GdkEventWindowState *window_state_event);
+    void on_rgb_entry_changed();
+    void on_hsl_entry_changed();
+    void on_cmyk_entry_changed();
 };

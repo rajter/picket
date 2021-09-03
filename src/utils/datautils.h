@@ -28,4 +28,29 @@ namespace DataUtilities
         sstream << std::setfill('0') << std::setw(2) << std::hex << i;
         return sstream.str();
     }
+
+    static string SanitizeStringToInt(const string &input, int minValue, int maxValue, int defaultInt)
+    {
+        string s = "";
+
+        for(char c : input)
+        {
+            if(isdigit(c))
+                s += c;
+        }
+
+        if(s.empty())
+        {
+            // return s;
+            s = to_string(defaultInt);
+        }
+        else
+        {
+            int value = stoi(s);
+            if(value < minValue || value > maxValue)
+                s = to_string(defaultInt);
+        }
+
+        return s;
+    }
 };

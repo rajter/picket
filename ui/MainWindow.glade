@@ -1,102 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkWindow" id="MainWindow">
-    <property name="can_focus">False</property>
-    <property name="default_width">500</property>
-    <property name="default_height">350</property>
-    <property name="decorated">False</property>
+    <property name="can-focus">False</property>
+    <property name="default-width">500</property>
+    <property name="default-height">350</property>
     <child>
-      <placeholder/>
-    </child>
-    <child>
-      <object class="GtkBox">
+      <object class="GtkStack" id="stack1">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
+        <property name="can-focus">False</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkToolbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkToolButton" id="SettingsBtn">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="stock_id">gtk-properties</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolButton" id="ColorPickerBtn">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="stock_id">gtk-color-picker</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkToolButton" id="ExitBtn">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="stock_id">gtk-close</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="homogeneous">True</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkDrawingArea" id="ColorArea">
-                <property name="height_request">150</property>
+                <property name="height-request">150</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_bottom">5</property>
+                <property name="can-focus">False</property>
+                <property name="margin-bottom">5</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -107,17 +31,15 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
+                <property name="can-focus">False</property>
+                <property name="margin-left">5</property>
+                <property name="margin-right">5</property>
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">5</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_right">5</property>
+                    <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Format:</property>
                   </object>
                   <packing>
@@ -129,7 +51,7 @@
                 <child>
                   <object class="GtkComboBoxText" id="FormatComboBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -141,11 +63,11 @@
                   <object class="GtkButton" id="EditBtn">
                     <property name="label">gtk-edit</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_right">5</property>
-                    <property name="use_stock">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="margin-left">6</property>
+                    <property name="margin-right">5</property>
+                    <property name="use-stock">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -157,9 +79,9 @@
                   <object class="GtkButton" id="ClipboardBtn">
                     <property name="label">gtk-copy</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_stock">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="use-stock">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -177,376 +99,583 @@
             <child>
               <object class="GtkNotebook">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="show_border">False</property>
+                <property name="can-focus">True</property>
+                <property name="margin-left">5</property>
+                <property name="margin-right">5</property>
+                <property name="margin-bottom">5</property>
+                <property name="show-border">False</property>
                 <child>
+                  <!-- n-columns=3 n-rows=4 -->
                   <object class="GtkGrid">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_right">5</property>
-                    <property name="margin_top">5</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">5</property>
                     <property name="hexpand">True</property>
-                    <property name="row_homogeneous">True</property>
+                    <property name="row-homogeneous">True</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="width_request">50</property>
+                        <property name="width-request">50</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">R</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">G</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">B</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">A</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="RedScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="hexpand">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="GreenScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="BlueScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="RgbAlphaScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="RedEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="GreenEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="BlueEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="AlphaEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
                 <child type="tab">
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="label" translatable="yes">RBG</property>
                   </object>
                   <packing>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
                 <child>
+                  <!-- n-columns=3 n-rows=4 -->
                   <object class="GtkGrid">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_right">5</property>
-                    <property name="margin_top">5</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">5</property>
                     <property name="hexpand">True</property>
-                    <property name="row_homogeneous">True</property>
+                    <property name="row-homogeneous">True</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="width_request">50</property>
+                        <property name="width-request">50</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">H</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">S</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">L</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">A</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="HueScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="hexpand">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="SaturationScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="LightnessScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="HslAlphaScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="HueEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="SaturationEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="LightnessEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="HslAlphaEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="position">1</property>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
                 <child type="tab">
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="label" translatable="yes">HSL</property>
                   </object>
                   <packing>
                     <property name="position">1</property>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
                 <child>
+                  <!-- n-columns=3 n-rows=4 -->
                   <object class="GtkGrid">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_right">5</property>
-                    <property name="margin_top">5</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">5</property>
                     <property name="hexpand">True</property>
-                    <property name="row_homogeneous">True</property>
+                    <property name="row-homogeneous">True</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="width_request">50</property>
+                        <property name="width-request">50</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">C</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">M</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Y</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="label" translatable="yes">K</property>
                       </object>
                       <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="CyanScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can-focus">True</property>
                         <property name="hexpand">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="MagentaScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="YellowScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkScale" id="KeyScale">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="round_digits">1</property>
+                        <property name="can-focus">True</property>
+                        <property name="round-digits">0</property>
                         <property name="digits">0</property>
-                        <property name="value_pos">right</property>
+                        <property name="draw-value">False</property>
+                        <property name="value-pos">right</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="CyanEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="MagentaEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="YellowEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="KeyEntry">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="max-length">3</property>
+                        <property name="has-frame">False</property>
+                        <property name="width-chars">3</property>
+                        <property name="max-width-chars">3</property>
+                        <property name="xalign">1</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                      <packing>
+                        <property name="left-attach">2</property>
+                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="position">2</property>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
                 <child type="tab">
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="label" translatable="yes">CMYK</property>
                   </object>
                   <packing>
                     <property name="position">2</property>
-                    <property name="tab_fill">False</property>
+                    <property name="tab-fill">False</property>
                   </packing>
                 </child>
               </object>
@@ -558,9 +687,104 @@
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
+            <property name="name">Picker</property>
+            <property name="title" translatable="yes">Picker</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="name">Contrast</property>
+            <property name="title" translatable="yes">Contrast</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="name">Swatches</property>
+            <property name="title" translatable="yes">Swatches</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="show-close-button">True</property>
+        <child type="title">
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkButton" id="SettingsBtn">
+            <property name="name">properties-button</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="receives-default">False</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">document-properties</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="ColorPickerBtn">
+            <property name="name">properties-button</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="receives-default">False</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">insert-object</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStackSwitcher">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="stack">stack1</property>
+          </object>
+          <packing>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

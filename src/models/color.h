@@ -31,7 +31,7 @@ public:
     Color(int r, int g, int b);
     Color(int r, int g, int b, int a);
     void SetRGB(int r, int g, int b, int a = 255);
-    void SetHSL(int h, int s, int l);
+    void SetHSL(int h, int s, int l, int a = 255);
     void SetCmyk(int c, int m, int y, int k);
 
     int GetRed() {return red;}

@@ -37,11 +37,12 @@ void Color::SetRGB(int r, int g, int b, int a)
     ColorSpace::RgbToCmyk(red, green, blue, &cyan, &magenta, &yellow, &key);
 }
 
-void Color::SetHSL(int h, int s, int l)
+void Color::SetHSL(int h, int s, int l, int a)
 {
     hue = h;
     saturation = s;
     lightness = l;
+    alpha = a;
     ColorSpace::HslToRgb(hue, (float)GetSaturationAsDouble(), (float)GetLightnessAsDouble(), &red, &green, &blue);
     ColorSpace::RgbToCmyk(red, green, blue, &cyan, &magenta, &yellow, &key);
 }

@@ -13,41 +13,67 @@ using namespace std;
 
 MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder): Gtk::Window(cobject)
 {
-    refBuilder->get_widget("ExitBtn", exitBtn);
     refBuilder->get_widget("SettingsBtn", settingsBtn);
     refBuilder->get_widget("ColorPickerBtn", colorPickerBtn);
     refBuilder->get_widget("ClipboardBtn", clipboardBtn);
     refBuilder->get_widget("EditBtn", editBtn);
     refBuilder->get_widget("ColorArea", colorArea);
+    refBuilder->get_widget("FormatComboBox", formatComboBox);
+
     refBuilder->get_widget("RedScale", redScale);
     refBuilder->get_widget("GreenScale", greenScale);
     refBuilder->get_widget("BlueScale", blueScale);
     refBuilder->get_widget("RgbAlphaScale", rgbAlphaScale);
-    refBuilder->get_widget("HslAlphaScale", hslAlphaScale);
     refBuilder->get_widget("HueScale", hueScale);
     refBuilder->get_widget("SaturationScale", saturationScale);
     refBuilder->get_widget("LightnessScale", lightnessScale);
-    refBuilder->get_widget("LightnessScale", cyanScale);
+    refBuilder->get_widget("HslAlphaScale", hslAlphaScale);
     refBuilder->get_widget("CyanScale", cyanScale);
     refBuilder->get_widget("MagentaScale", magentaScale);
     refBuilder->get_widget("YellowScale", yellowScale);
     refBuilder->get_widget("KeyScale", keyScale);
-    refBuilder->get_widget("FormatComboBox", formatComboBox);
+
+    refBuilder->get_widget("RedEntry", redEntry);
+    refBuilder->get_widget("GreenEntry", greenEntry);
+    refBuilder->get_widget("BlueEntry", blueEntry);
+    refBuilder->get_widget("AlphaEntry", alphaEntry);
+    refBuilder->get_widget("HueEntry", hueEntry);
+    refBuilder->get_widget("SaturationEntry", saturationEntry);
+    refBuilder->get_widget("LightnessEntry", lightnessEntry);
+    refBuilder->get_widget("HslAlphaEntry", hslAlphaEntry);
+    refBuilder->get_widget("CyanEntry", cyanEntry);
+    refBuilder->get_widget("MagentaEntry", magentaEntry);
+    refBuilder->get_widget("YellowEntry", yellowEntry);
+    refBuilder->get_widget("KeyEntry", keyEntry);
 
     redScale->set_range(0, 255);
     blueScale->set_range(0, 255);
     greenScale->set_range(0, 255);
     rgbAlphaScale->set_range(0, 255);
     rgbAlphaScale->set_value(255);
-    hslAlphaScale->set_range(0, 255);
-    hslAlphaScale->set_value(255);
     hueScale->set_range(0, 360);
     saturationScale->set_range(0, 100);
     lightnessScale->set_range(0, 100);
+    hslAlphaScale->set_range(0, 255);
+    hslAlphaScale->set_value(255);
     cyanScale->set_range(0, 100);
     magentaScale->set_range(0, 100);
     yellowScale->set_range(0, 100);
     keyScale->set_range(0, 100);
+
+    redEntry->set_text("0");
+    greenEntry->set_text("0");
+    blueEntry->set_text("0");
+    alphaEntry->set_text("255");
+    hueEntry->set_text("0");
+    saturationEntry->set_text("0");
+    lightnessEntry->set_text("0");
+    hslAlphaEntry->set_text("255");
+    cyanEntry->set_text("0");
+    magentaEntry->set_text("0");
+    yellowEntry->set_text("0");
+    keyEntry->set_text("0");
+
     redScaleSignal = redScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_color_changed));
     greenScaleSignal = greenScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_color_changed));
     blueScaleSignal = blueScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_color_changed));
@@ -61,8 +87,20 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     yellowScaleSignal = yellowScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_color_changed));
     keyScaleSignal = keyScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_color_changed));
 
+    redEntrySignal = redEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
+    greenEntrySignal = greenEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
+    blueEntrySignal = blueEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
+    rgbAlphaEntrySignal = alphaEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
+    hueEntrySignal = hueEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_hsl_entry_changed));
+    saturationEntrySignal = saturationEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_hsl_entry_changed));
+    lightnessEntrySignal = lightnessEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_hsl_entry_changed));
+    hslAlphaEntrySignal = hslAlphaEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_hsl_entry_changed));
+    cyanEntrySignal = cyanEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_entry_changed));
+    magentaEntrySignal = magentaEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_entry_changed));
+    yellowEntrySignal = yellowEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_entry_changed));
+    keyEntrySignal = keyEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_entry_changed));
+
     colorArea->signal_draw().connect(sigc::mem_fun(this, &MainWindow::on_colorArea_draw));
-    exitBtn->signal_clicked().connect(sigc::mem_fun(this, &MainWindow::on_exitButton_clicked) );
     settingsBtn->signal_clicked().connect(sigc::mem_fun(this, &MainWindow::on_settingsButton_clicked) );
     colorPickerBtn->signal_clicked().connect(sigc::mem_fun(this, &MainWindow::on_colorPickerButton_clicked) );
     clipboardBtn->signal_clicked().connect(sigc::mem_fun(this, &MainWindow::on_clipboardButton_clicked) );
@@ -79,12 +117,13 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
 
 MainWindow::~MainWindow()
 {
-    delete exitBtn;
     delete settingsBtn;
     delete colorPickerBtn;
     delete editBtn;
     delete clipboardBtn;
     delete colorArea;
+    delete formatComboBox;
+
     delete redScale;
     delete greenScale;
     delete blueScale;
@@ -97,7 +136,19 @@ MainWindow::~MainWindow()
     delete magentaScale;
     delete yellowScale;
     delete keyScale;
-    delete formatComboBox;
+
+    delete redEntry;
+    delete greenEntry;
+    delete blueEntry;
+    delete alphaEntry;
+    delete hueEntry;
+    delete saturationEntry;
+    delete lightnessEntry;
+    delete hslAlphaEntry;
+    delete cyanEntry;
+    delete magentaEntry;
+    delete yellowEntry;
+    delete keyEntry;
 }
 
 string MainWindow::CreateFormat()
@@ -179,7 +230,8 @@ void MainWindow::SetPickedColor(Color pickedColor)
 {
     pickedColor.Log();
     BlockUiSignals();
-    SyncUiWithColor(pickedColor);
+    SyncUiWithColor(pickedColor, UiEditType::Scale);
+    SyncUiWithColor(pickedColor, UiEditType::Entry);
     UnblockUiSignals();
     color.SetRGB(pickedColor.GetRed(), pickedColor.GetGreen(), pickedColor.GetBlue());
 
@@ -187,25 +239,72 @@ void MainWindow::SetPickedColor(Color pickedColor)
         on_clipboardButton_clicked();
 }
 
-void MainWindow::SyncColorWithUi(const string &colorspace)
+void MainWindow::SyncColorWithUi(ColorSpace colorspace, UiEditType editType)
 {
-    if(colorspace == "RGB")
+    if(colorspace == ColorSpace::RGB)
     {
-        color.SetRGB(static_cast<int>(redScale->get_value()), static_cast<int>(greenScale->get_value()), static_cast<int>(blueScale->get_value()), static_cast<int>(rgbAlphaScale->get_value()));
+        if(editType == UiEditType::Scale)
+        {
+            color.SetRGB(static_cast<int>(redScale->get_value()), static_cast<int>(greenScale->get_value()), static_cast<int>(blueScale->get_value()), static_cast<int>(rgbAlphaScale->get_value()));
+        }
+        else if(editType == UiEditType::Entry)
+        {
+            SanitizeEntryInputs(colorspace);
+            string red = redEntry->get_text();
+            string green = greenEntry->get_text();
+            string blue = blueEntry->get_text();
+            string alpha = alphaEntry->get_text();
+            if(red.empty() || green.empty() || blue.empty() || alpha.empty())
+                return;
+
+            color.SetRGB(stoi(red), stoi(green), stoi(blue), stoi(alpha));
+        }
     }
-    else if(colorspace == "HSL")
+    else if(colorspace == ColorSpace::HSL)
     {
-        color.SetHSL(static_cast<int>(hueScale->get_value()), static_cast<int>(saturationScale->get_value()), static_cast<int>(lightnessScale->get_value()));
+        if(editType == UiEditType::Scale)
+        {
+            color.SetHSL(static_cast<int>(hueScale->get_value()), static_cast<int>(saturationScale->get_value()), static_cast<int>(lightnessScale->get_value()), static_cast<int>(hslAlphaScale->get_value()));
+        }
+        else if(editType == UiEditType::Entry)
+        {
+            SanitizeEntryInputs(colorspace);
+
+            string hue = hueEntry->get_text();
+            string saturation = saturationEntry->get_text();
+            string lightness = lightnessEntry->get_text();
+            string alpha = hslAlphaEntry->get_text();
+            if(hue.empty() || saturation.empty() || lightness.empty() || alpha.empty())
+                return;
+
+            color.SetHSL(stoi(hue), stoi(saturation), stoi(lightness), stoi(alpha));
+        }
     }
-    else if(colorspace == "CMYK")
+    else if(colorspace == ColorSpace::CMYK)
     {
-        color.SetCmyk(static_cast<int>(cyanScale->get_value()), static_cast<int>(magentaScale->get_value()), static_cast<int>(yellowScale->get_value()), static_cast<int>(keyScale->get_value()));
+        if(editType == UiEditType::Scale)
+        {
+            color.SetCmyk(static_cast<int>(cyanScale->get_value()), static_cast<int>(magentaScale->get_value()), static_cast<int>(yellowScale->get_value()), static_cast<int>(keyScale->get_value()));
+        }
+        else if(editType == UiEditType::Entry)
+        {
+            SanitizeEntryInputs(colorspace);
+
+            string cyan = cyanEntry->get_text();
+            string magenta = magentaEntry->get_text();
+            string yellow = yellowEntry->get_text();
+            string key = keyEntry->get_text();
+            if(cyan.empty() || magenta.empty() || yellow.empty() || key.empty())
+                return;
+
+            color.SetCmyk(stoi(cyan), stoi(magenta), stoi(yellow), stoi(key));
+        }
     }
 
     colorArea->queue_draw();
 }
 
-void MainWindow::SyncUiWithColor(Color syncColor)
+void MainWindow::SyncUiWithColor(Color syncColor, UiEditType editType)
 {
     redScale->set_value(syncColor.GetRed());
     greenScale->set_value(syncColor.GetGreen());
@@ -219,6 +318,24 @@ void MainWindow::SyncUiWithColor(Color syncColor)
     magentaScale->set_value(syncColor.GetMagenta());
     yellowScale->set_value(syncColor.GetYellow());
     keyScale->set_value(syncColor.GetKey());
+
+    if(editType == UiEditType::Scale)
+    {
+        redEntry->set_text(to_string(syncColor.GetRed()));
+        greenEntry->set_text(to_string(syncColor.GetGreen()));
+        blueEntry->set_text(to_string(syncColor.GetBlue()));
+        alphaEntry->set_text(to_string(syncColor.GetAlpha()));
+
+        hueEntry->set_text(to_string(syncColor.GetHue()));
+        saturationEntry->set_text(to_string(syncColor.GetSaturation()));
+        lightnessEntry->set_text(to_string(syncColor.GetLightness()));
+        hslAlphaEntry->set_text(to_string(syncColor.GetAlpha()));
+
+        cyanEntry->set_text(to_string(syncColor.GetCyan()));
+        magentaEntry->set_text(to_string(syncColor.GetMagenta()));
+        yellowEntry->set_text(to_string(syncColor.GetYellow()));
+        keyEntry->set_text(to_string(syncColor.GetKey()));
+    }
 
     colorArea->queue_draw();
 }
@@ -237,6 +354,19 @@ void MainWindow::BlockUiSignals()
     magentaScaleSignal.block();
     yellowScaleSignal.block();
     keyScaleSignal.block();
+
+    redEntrySignal.block();
+    greenEntrySignal.block();
+    blueEntrySignal.block();
+    rgbAlphaEntrySignal.block();
+    hueEntrySignal.block();
+    saturationEntrySignal.block();
+    lightnessEntrySignal.block();
+    hslAlphaEntrySignal.block();
+    cyanEntrySignal.block();
+    magentaEntrySignal.block();
+    yellowEntrySignal.block();
+    keyEntrySignal.block();
 }
 
 void MainWindow::UnblockUiSignals()
@@ -253,29 +383,97 @@ void MainWindow::UnblockUiSignals()
     magentaScaleSignal.unblock();
     yellowScaleSignal.unblock();
     keyScaleSignal.unblock();
+
+    redEntrySignal.unblock();
+    greenEntrySignal.unblock();
+    blueEntrySignal.unblock();
+    rgbAlphaEntrySignal.unblock();
+    hueEntrySignal.unblock();
+    saturationEntrySignal.unblock();
+    lightnessEntrySignal.unblock();
+    hslAlphaEntrySignal.unblock();
+    cyanEntrySignal.unblock();
+    magentaEntrySignal.unblock();
+    yellowEntrySignal.unblock();
+    keyEntrySignal.unblock();
+}
+
+void MainWindow::SanitizeEntryInputs(ColorSpace colorspace)
+{
+    if(colorspace == ColorSpace::RGB)
+    {
+        SanitizeEntryInput(redEntry);
+        SanitizeEntryInput(greenEntry);
+        SanitizeEntryInput(blueEntry);
+        SanitizeEntryInput(alphaEntry);
+    }
+    else if(colorspace == ColorSpace::HSL)
+    {
+        SanitizeEntryInput(hueEntry);
+        SanitizeEntryInput(saturationEntry);
+        SanitizeEntryInput(lightnessEntry);
+        SanitizeEntryInput(hslAlphaEntry);
+    }
+    else if(colorspace == ColorSpace::CMYK)
+    {
+        SanitizeEntryInput(cyanEntry);
+        SanitizeEntryInput(magentaEntry);
+        SanitizeEntryInput(yellowEntry);
+        SanitizeEntryInput(keyEntry);
+    }
+}
+
+void MainWindow::SanitizeEntryInput(Gtk::Entry *entry)
+{
+    string sanitizedEntry = DataUtilities::SanitizeStringToInt(entry->get_text(), 0, 255, 0);
+    entry->set_text(sanitizedEntry);
 }
 
 void MainWindow::on_rgb_color_changed()
 {
     BlockUiSignals();
-    SyncColorWithUi("RGB");
-    SyncUiWithColor(color);
+    SyncColorWithUi(ColorSpace::RGB, UiEditType::Scale);
+    SyncUiWithColor(color, UiEditType::Scale);
     UnblockUiSignals();
 }
 
 void MainWindow::on_hsl_color_changed()
 {
     BlockUiSignals();
-    SyncColorWithUi("HSL");
-    SyncUiWithColor(color);
+    SyncColorWithUi(ColorSpace::HSL, UiEditType::Scale);
+    SyncUiWithColor(color, UiEditType::Scale);
     UnblockUiSignals();
 }
 
 void MainWindow::on_cmyk_color_changed()
 {
     BlockUiSignals();
-    SyncColorWithUi("CMYK");
-    SyncUiWithColor(color);
+    SyncColorWithUi(ColorSpace::CMYK, UiEditType::Scale);
+    SyncUiWithColor(color, UiEditType::Scale);
+    UnblockUiSignals();
+}
+
+void MainWindow::on_rgb_entry_changed()
+{
+    BlockUiSignals();
+    SyncColorWithUi(ColorSpace::RGB, UiEditType::Entry);
+    SyncUiWithColor(color, UiEditType::Entry);
+    UnblockUiSignals();
+}
+
+void MainWindow::on_hsl_entry_changed()
+{
+    BlockUiSignals();
+    SyncColorWithUi(ColorSpace::HSL, UiEditType::Entry);
+    SyncUiWithColor(color, UiEditType::Entry);
+    UnblockUiSignals();
+}
+
+void MainWindow::on_cmyk_entry_changed()
+{
+    BlockUiSignals();
+    SyncColorWithUi(ColorSpace::CMYK, UiEditType::Entry);
+    SyncUiWithColor(color, UiEditType::Entry);
     UnblockUiSignals();
 }
 
@@ -359,53 +557,60 @@ void MainWindow::on_format_changed()
 
 bool MainWindow::on_key_pressed(GdkEventKey* event)
 {
-    switch(event->keyval)
+    bool ctrlPressed = (event->state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK;
+
+    if(ctrlPressed)
     {
-        case GDK_KEY_p:
-        case GDK_KEY_space:
-            on_colorPickerButton_clicked();
-            break;
-        case GDK_KEY_1:
-            formatComboBox->set_active(0); queue_draw();
-            break;
-        case GDK_KEY_2:
-            formatComboBox->set_active(1); queue_draw();
-            break;
-        case GDK_KEY_3:
-            formatComboBox->set_active(2); queue_draw();
-            break;
-        case GDK_KEY_4:
-            formatComboBox->set_active(3); queue_draw();
-            break;
-        case GDK_KEY_5:
-            formatComboBox->set_active(4); queue_draw();
-            break;
-        case GDK_KEY_6:
-            formatComboBox->set_active(5); queue_draw();
-            break;
-        case GDK_KEY_7:
-            formatComboBox->set_active(6); queue_draw();
-            break;
-        case GDK_KEY_8:
-            formatComboBox->set_active(7); queue_draw();
-            break;
-        case GDK_KEY_9:
-            formatComboBox->set_active(8); queue_draw();
-            break;
-        case GDK_KEY_0:
-            formatComboBox->set_active(9); queue_draw();
-            break;
-        case GDK_KEY_Tab:
-            on_clipboardButton_clicked();
-            break;
-        case GDK_KEY_q:
-            on_exitButton_clicked();
-            break;
-        default:
-            break;
+        switch(event->keyval)
+        {
+            case GDK_KEY_p:
+            case GDK_KEY_space:
+                on_colorPickerButton_clicked();
+                break;
+            case GDK_KEY_1:
+                formatComboBox->set_active(0); queue_draw();
+                break;
+            case GDK_KEY_2:
+                formatComboBox->set_active(1); queue_draw();
+                break;
+            case GDK_KEY_3:
+                formatComboBox->set_active(2); queue_draw();
+                break;
+            case GDK_KEY_4:
+                formatComboBox->set_active(3); queue_draw();
+                break;
+            case GDK_KEY_5:
+                formatComboBox->set_active(4); queue_draw();
+                break;
+            case GDK_KEY_6:
+                formatComboBox->set_active(5); queue_draw();
+                break;
+            case GDK_KEY_7:
+                formatComboBox->set_active(6); queue_draw();
+                break;
+            case GDK_KEY_8:
+                formatComboBox->set_active(7); queue_draw();
+                break;
+            case GDK_KEY_9:
+                formatComboBox->set_active(8); queue_draw();
+                break;
+            case GDK_KEY_0:
+                formatComboBox->set_active(9); queue_draw();
+                break;
+            case GDK_KEY_c:
+                on_clipboardButton_clicked();
+                break;
+            case GDK_KEY_q:
+                on_exitButton_clicked();
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 bool MainWindow::on_window_state(GdkEventWindowState *window_state_event)
