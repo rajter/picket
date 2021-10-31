@@ -36,19 +36,28 @@ namespace DataUtilities
         for(char c : input)
         {
             if(isdigit(c))
+            {
                 s += c;
+            }
         }
 
-        if(s.empty())
+        // Remove first zero char
+        if(s.length() > 1 && s[0] == '0')
         {
-            // return s;
-            s = to_string(defaultInt);
+            s.erase(0,1);
         }
-        else
+
+        if(!s.empty())
         {
             int value = stoi(s);
-            if(value < minValue || value > maxValue)
-                s = to_string(defaultInt);
+            if(value < minValue)
+            {
+                s = to_string(minValue);
+            }
+            else if( value > maxValue)
+            {
+                s = to_string(maxValue);
+            }
         }
 
         return s;

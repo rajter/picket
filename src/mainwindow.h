@@ -110,7 +110,7 @@ public:
     void BlockUiSignals();
     void UnblockUiSignals();
     void SanitizeEntryInputs(ColorSpace colorspace);
-    void SanitizeEntryInput(Gtk::Entry *entry);
+    void SanitizeEntryInput(Gtk::Entry *entry, int minValue, int maxValue, int defaultValue);
 
     bool on_colorArea_draw(const Cairo::RefPtr<Cairo::Context>& cr);
     void on_exitButton_clicked();
@@ -127,4 +127,5 @@ public:
     void on_rgb_entry_changed();
     void on_hsl_entry_changed();
     void on_cmyk_entry_changed();
+    bool on_entry_key_press(GdkEventKey *event);
 };

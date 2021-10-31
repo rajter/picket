@@ -707,31 +707,13 @@
             </child>
           </object>
           <packing>
-            <property name="name">Contrast</property>
-            <property name="title" translatable="yes">Contrast</property>
+            <property name="name">History</property>
+            <property name="title" translatable="yes">History</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="name">Swatches</property>
-            <property name="title" translatable="yes">Swatches</property>
-            <property name="position">2</property>
-          </packing>
+          <placeholder/>
         </child>
       </object>
     </child>

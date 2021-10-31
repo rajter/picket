@@ -87,6 +87,20 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     yellowScaleSignal = yellowScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_color_changed));
     keyScaleSignal = keyScale->signal_value_changed().connect(sigc::mem_fun(this, &MainWindow::on_cmyk_color_changed));
 
+    redEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    greenEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    blueEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    alphaEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    hueEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    saturationEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    lightnessEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    hslAlphaEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    alphaEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    cyanEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    magentaEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    yellowEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+    keyEntry->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_entry_key_press), false);
+
     redEntrySignal = redEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
     greenEntrySignal = greenEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
     blueEntrySignal = blueEntry->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_rgb_entry_changed));
@@ -110,7 +124,6 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_key_pressed), false);
     signal_window_state_event().connect(sigc::mem_fun(this, &MainWindow::on_window_state), false);
 
-    set_title("Picket");
     set_size_request(100, 350);
     color = Color(0,0,0);
 }
@@ -249,7 +262,6 @@ void MainWindow::SyncColorWithUi(ColorSpace colorspace, UiEditType editType)
         }
         else if(editType == UiEditType::Entry)
         {
-            SanitizeEntryInputs(colorspace);
             string red = redEntry->get_text();
             string green = greenEntry->get_text();
             string blue = blueEntry->get_text();
@@ -268,8 +280,6 @@ void MainWindow::SyncColorWithUi(ColorSpace colorspace, UiEditType editType)
         }
         else if(editType == UiEditType::Entry)
         {
-            SanitizeEntryInputs(colorspace);
-
             string hue = hueEntry->get_text();
             string saturation = saturationEntry->get_text();
             string lightness = lightnessEntry->get_text();
@@ -288,8 +298,6 @@ void MainWindow::SyncColorWithUi(ColorSpace colorspace, UiEditType editType)
         }
         else if(editType == UiEditType::Entry)
         {
-            SanitizeEntryInputs(colorspace);
-
             string cyan = cyanEntry->get_text();
             string magenta = magentaEntry->get_text();
             string yellow = yellowEntry->get_text();
@@ -402,30 +410,30 @@ void MainWindow::SanitizeEntryInputs(ColorSpace colorspace)
 {
     if(colorspace == ColorSpace::RGB)
     {
-        SanitizeEntryInput(redEntry);
-        SanitizeEntryInput(greenEntry);
-        SanitizeEntryInput(blueEntry);
-        SanitizeEntryInput(alphaEntry);
+        SanitizeEntryInput(redEntry, 0, 255, 0);
+        SanitizeEntryInput(greenEntry, 0, 255, 0);
+        SanitizeEntryInput(blueEntry, 0, 255, 0);
+        SanitizeEntryInput(alphaEntry, 0, 255, 0);
     }
     else if(colorspace == ColorSpace::HSL)
     {
-        SanitizeEntryInput(hueEntry);
-        SanitizeEntryInput(saturationEntry);
-        SanitizeEntryInput(lightnessEntry);
-        SanitizeEntryInput(hslAlphaEntry);
+        SanitizeEntryInput(hueEntry, 0, 360, 0);
+        SanitizeEntryInput(saturationEntry, 0, 100, 0);
+        SanitizeEntryInput(lightnessEntry, 0, 100, 0);
+        SanitizeEntryInput(hslAlphaEntry, 0, 255, 0);
     }
     else if(colorspace == ColorSpace::CMYK)
     {
-        SanitizeEntryInput(cyanEntry);
-        SanitizeEntryInput(magentaEntry);
-        SanitizeEntryInput(yellowEntry);
-        SanitizeEntryInput(keyEntry);
+        SanitizeEntryInput(cyanEntry, 0, 100, 0);
+        SanitizeEntryInput(magentaEntry, 0, 100, 0);
+        SanitizeEntryInput(yellowEntry, 0, 100, 0);
+        SanitizeEntryInput(keyEntry, 0, 100, 0);
     }
 }
 
-void MainWindow::SanitizeEntryInput(Gtk::Entry *entry)
+void MainWindow::SanitizeEntryInput(Gtk::Entry *entry, int minValue, int maxValue, int defaultValue)
 {
-    string sanitizedEntry = DataUtilities::SanitizeStringToInt(entry->get_text(), 0, 255, 0);
+    string sanitizedEntry = DataUtilities::SanitizeStringToInt(entry->get_text(), minValue, maxValue, defaultValue);
     entry->set_text(sanitizedEntry);
 }
 
@@ -453,9 +461,50 @@ void MainWindow::on_cmyk_color_changed()
     UnblockUiSignals();
 }
 
+bool MainWindow::on_entry_key_press(GdkEventKey *event)
+{
+    switch(event->keyval)
+        {
+            case GDK_KEY_1:
+            case GDK_KEY_2:
+            case GDK_KEY_3:
+            case GDK_KEY_4:
+            case GDK_KEY_5:
+            case GDK_KEY_6:
+            case GDK_KEY_7:
+            case GDK_KEY_8:
+            case GDK_KEY_9:
+            case GDK_KEY_0:
+            case GDK_KEY_KP_0:
+            case GDK_KEY_KP_1:
+            case GDK_KEY_KP_2:
+            case GDK_KEY_KP_3:
+            case GDK_KEY_KP_4:
+            case GDK_KEY_KP_5:
+            case GDK_KEY_KP_6:
+            case GDK_KEY_KP_7:
+            case GDK_KEY_KP_8:
+            case GDK_KEY_KP_9:
+            case GDK_KEY_Left:
+            case GDK_KEY_Up:
+            case GDK_KEY_Right:
+            case GDK_KEY_Down:
+            case GDK_KEY_Delete:
+            case GDK_KEY_BackSpace:
+            case GDK_KEY_Tab:
+                return false;
+            default:
+                break;
+        }
+
+
+    return true;
+}
+
 void MainWindow::on_rgb_entry_changed()
 {
     BlockUiSignals();
+    SanitizeEntryInputs(ColorSpace::RGB);
     SyncColorWithUi(ColorSpace::RGB, UiEditType::Entry);
     SyncUiWithColor(color, UiEditType::Entry);
     UnblockUiSignals();
@@ -464,6 +513,7 @@ void MainWindow::on_rgb_entry_changed()
 void MainWindow::on_hsl_entry_changed()
 {
     BlockUiSignals();
+    SanitizeEntryInputs(ColorSpace::HSL);
     SyncColorWithUi(ColorSpace::HSL, UiEditType::Entry);
     SyncUiWithColor(color, UiEditType::Entry);
     UnblockUiSignals();
@@ -472,6 +522,7 @@ void MainWindow::on_hsl_entry_changed()
 void MainWindow::on_cmyk_entry_changed()
 {
     BlockUiSignals();
+    SanitizeEntryInputs(ColorSpace::CMYK);
     SyncColorWithUi(ColorSpace::CMYK, UiEditType::Entry);
     SyncUiWithColor(color, UiEditType::Entry);
     UnblockUiSignals();
