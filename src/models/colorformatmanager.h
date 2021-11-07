@@ -1,10 +1,10 @@
 #pragma once
 
-#include <iostream>
 #include <map>
-#include <string>
-#include <iterator>
 #include <vector>
+#include <string>
+#include <iostream>
+#include <iterator>
 
 using namespace std;
 

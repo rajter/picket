@@ -28,6 +28,8 @@ add_executable(picket
         src/models/color.h
         src/models/colorformatmanager.cpp
         src/models/colorformatmanager.h
+        src/models/historymanager.cpp
+        src/models/historymanager.h
         src/utils/colorspace.cpp
         src/utils/datautils.h
         src/utils/dirutils.h

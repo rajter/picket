@@ -6,6 +6,7 @@
 #include "formateditwindow.h"
 #include "models/color.h"
 #include "models/colorformatmanager.h"
+#include "models/historymanager.h"
 #include "cfg/config.h"
 #include "utils/enums.h"
 
@@ -28,6 +29,7 @@ private:
     string CreateFormat();
     void SaveConfiguration();
     ColorFormatManager colorFormatManager = ColorFormatManager((string)getenv("HOME")+"/.picket/formats");
+    HistoryManager historyManager = HistoryManager((string)getenv("HOME")+"/.picket/history");
 
     sigc::connection redScaleSignal;
     sigc::connection greenScaleSignal;
