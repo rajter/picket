@@ -242,6 +242,7 @@ void MainWindow::Show(int response)
 void MainWindow::SetPickedColor(Color pickedColor)
 {
     pickedColor.Log();
+    historyManager.SaveColor(pickedColor);
     BlockUiSignals();
     SyncUiWithColor(pickedColor, UiEditType::Scale);
     SyncUiWithColor(pickedColor, UiEditType::Entry);

@@ -1,7 +1,8 @@
-#include "color.h"
-#include "../utils/colorspace.cpp"
 #include <iostream>
 #include <vector>
+#include "color.h"
+#include "../utils/colorspace.cpp"
+#include "../utils/stringutils.cpp"
 
 using namespace std;
 using namespace DataUtilities;
@@ -71,6 +72,30 @@ Color Color::GetContrastColor()
     auto d = (luminance > 0.5) ? 255 : 0;
 
     return Color(d,d,d);
+}
+
+string Color::ToString() const
+{
+    time_t now = time(0);
+    string date = ctime(& now);
+
+    string colorString = "";
+    colorString.append(trim(date));
+    colorString.append("|");
+    colorString.append(to_string(red));
+    colorString.append(";");
+    colorString.append(to_string(green));
+    colorString.append(";");
+    colorString.append(to_string(blue));
+    colorString.append(";");
+    colorString.append(to_string(alpha));
+
+    return trim(colorString);
+}
+
+bool Color::FromString(const string &colorString)
+{
+    return true;
 }
 
 map<string, string> Color::GetVariables()

@@ -64,5 +64,7 @@ public:
 
     void Log();
     Color GetContrastColor();
+    string ToString() const;
+    bool FromString(const string &colorString);
     map<string, string> GetVariables();
 };
