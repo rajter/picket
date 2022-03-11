@@ -18,7 +18,7 @@ struct ColorHistory
 class HistoryManager
 {
 private:
-    vector<ColorHistory> colorHistory;
+    vector<ColorHistory> historyList;
     string filepath = "";
 public:
     HistoryManager(string path);
@@ -26,4 +26,6 @@ public:
     bool CreateFile();
     bool SaveColor(const Color &color);
     void LoadHistory();
+    vector<ColorHistory> GetColorHistoryList();
+    ColorHistory GetColorHistoryList(int index);
 };

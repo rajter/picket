@@ -34,10 +34,10 @@ public:
     void SetHSL(int h, int s, int l, int a = 255);
     void SetCmyk(int c, int m, int y, int k);
 
-    int GetRed() {return red;}
-    int GetGreen() {return green;}
-    int GetBlue() {return blue;}
-    int GetAlpha() {return alpha;}
+    int GetRed() const {return red;}
+    int GetGreen() const {return green;}
+    int GetBlue() const {return blue;}
+    int GetAlpha() const {return alpha;}
     double GetRedAsDouble() {return (double)red/255;}
     double GetGreenAsDouble() {return (double)green/255;}
     double GetBlueAsDouble() {return (double)blue/255;}
@@ -46,7 +46,7 @@ public:
     string GetGreenHex() {return DataUtilities::IntToHex(green);}
     string GetBlueHex() {return DataUtilities::IntToHex(blue);}
     string GetAlphaHex() {return DataUtilities::IntToHex(alpha);}
-    string GetHexString();
+    string GetHexString(bool withAplha = true);
     int GetHue() { return hue; }
     int GetSaturation() { return saturation; }
     int GetLightness() { return lightness; }

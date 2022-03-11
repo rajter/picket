@@ -58,10 +58,14 @@ void Color::SetCmyk(int c, int m, int y, int k)
     ColorSpace::RgbToHsl(red, green, blue, &hue, &saturation, &lightness);
 }
 
-string Color::GetHexString()
+string Color::GetHexString(bool withAplha)
 {
     std::stringstream sstream;
-    sstream << "#" << GetRedHex() << GetGreenHex() << GetBlueHex() << GetAlphaHex();
+    sstream << "#" << GetRedHex() << GetGreenHex() << GetBlueHex();
+
+    if(withAplha)
+        sstream << GetAlphaHex();
+
     return sstream.str();
 }
 

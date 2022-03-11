@@ -46,6 +46,8 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     refBuilder->get_widget("YellowEntry", yellowEntry);
     refBuilder->get_widget("KeyEntry", keyEntry);
 
+    refBuilder->get_widget("ColorHistoryListBox", colorHistoryListbox);
+
     redScale->set_range(0, 255);
     blueScale->set_range(0, 255);
     greenScale->set_range(0, 255);
@@ -121,11 +123,15 @@ MainWindow::MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>
     editBtn->signal_clicked().connect(sigc::mem_fun(this, &MainWindow::on_editButton_clicked) );
     formatComboBox->signal_changed().connect(sigc::mem_fun(this, &MainWindow::on_format_changed));
 
+    colorHistoryListbox->signal_row_activated().connect(sigc::mem_fun(this, &MainWindow::on_history_row_activated), false);
+
     signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::on_key_pressed), false);
     signal_window_state_event().connect(sigc::mem_fun(this, &MainWindow::on_window_state), false);
 
     set_size_request(100, 350);
     color = Color(0,0,0);
+
+    LoadColorsFromHistory();
 }
 
 MainWindow::~MainWindow()
@@ -162,6 +168,8 @@ MainWindow::~MainWindow()
     delete magentaEntry;
     delete yellowEntry;
     delete keyEntry;
+
+    delete colorHistoryListbox;
 }
 
 string MainWindow::CreateFormat()
@@ -171,6 +179,60 @@ string MainWindow::CreateFormat()
     string format = colorFormatManager.GetFormat(selectedFormat);
 
     return format;
+}
+
+void MainWindow::LoadColorsFromHistory()
+{
+    vector<ColorHistory> colors = historyManager.GetColorHistoryList();
+    for (auto& color : colors)
+    {
+        AddColorHistoryRow(color.color);
+    }
+
+    ColorHistory history = historyManager.GetColorHistoryList(0);
+    SetColor(history.color);
+}
+
+void MainWindow::AddColorHistoryRow(Color &color)
+{
+    Gtk::Label *colorLabel = Gtk::manage(new Gtk::Label());
+    Gtk::Label *label = Gtk::manage(new Gtk::Label(color.GetHexString()+"\t"+to_string(color.GetRed())+";"+to_string(color.GetGreen())+";"+to_string(color.GetBlue())));
+    Gtk::ListBoxRow *row = Gtk::manage(new Gtk::ListBoxRow());
+    Gtk::Box *box = Gtk::manage(new Gtk::Box());
+    box->set_orientation(Gtk::Orientation::ORIENTATION_HORIZONTAL);
+    box->set_visible(true);
+    box->set_homogeneous(false);
+    label->set_halign(Gtk::Align::ALIGN_START);
+    label->set_visible(true);
+    label->set_hexpand(true);
+    colorLabel->set_visible(true);
+    colorLabel->set_width_chars(5);
+    colorLabel->set_max_width_chars(5);
+    colorLabel->set_size_request(10);
+    colorLabel->set_hexpand(false);
+    row->set_visible(true);
+
+    colorLabel->override_background_color(Gdk::RGBA(color.GetHexString(false)));
+    box->pack_start(*colorLabel, false, false);
+    box->pack_start(*label, true, true);
+    row->add(*box);
+
+    colorHistoryListbox->prepend(*row);
+}
+
+void MainWindow::AddColorToHistory(Color &color)
+{
+    historyManager.SaveColor(color);
+    AddColorHistoryRow(color);
+}
+
+void MainWindow::SetColor(Color& pColor)
+{
+    BlockUiSignals();
+    SyncUiWithColor(pColor, UiEditType::Scale);
+    SyncUiWithColor(pColor, UiEditType::Entry);
+    UnblockUiSignals();
+    this->color.SetRGB(pColor.GetRed(), pColor.GetGreen(), pColor.GetBlue());
 }
 
 void MainWindow::SaveConfiguration()
@@ -242,12 +304,8 @@ void MainWindow::Show(int response)
 void MainWindow::SetPickedColor(Color pickedColor)
 {
     pickedColor.Log();
-    historyManager.SaveColor(pickedColor);
-    BlockUiSignals();
-    SyncUiWithColor(pickedColor, UiEditType::Scale);
-    SyncUiWithColor(pickedColor, UiEditType::Entry);
-    UnblockUiSignals();
-    color.SetRGB(pickedColor.GetRed(), pickedColor.GetGreen(), pickedColor.GetBlue());
+    AddColorToHistory(pickedColor);
+    SetColor(pickedColor);
 
     if(config->ShouldCopyAfterPick())
         on_clipboardButton_clicked();
@@ -678,4 +736,11 @@ bool MainWindow::on_window_state(GdkEventWindowState *window_state_event)
     }
 
     return true;
+}
+
+void MainWindow::on_history_row_activated(Gtk::ListBoxRow* row)
+{
+    int rowIndex = row->get_index();
+    ColorHistory history = historyManager.GetColorHistoryList(rowIndex);
+    SetColor(history.color);
 }

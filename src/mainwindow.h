@@ -28,6 +28,10 @@ private:
 
     string CreateFormat();
     void SaveConfiguration();
+    void LoadColorsFromHistory();
+    void AddColorToHistory(Color &color);
+    void AddColorHistoryRow(Color &pColor);
+    void SetColor(Color& color);
     ColorFormatManager colorFormatManager = ColorFormatManager((string)getenv("HOME")+"/.picket/formats");
     HistoryManager historyManager = HistoryManager((string)getenv("HOME")+"/.picket/history");
 
@@ -94,6 +98,8 @@ protected:
     Gtk::Entry *yellowEntry;
     Gtk::Entry *keyEntry;
 
+    Gtk::ListBox *colorHistoryListbox;
+
 public:
     MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
     ~MainWindow();
@@ -130,4 +136,5 @@ public:
     void on_hsl_entry_changed();
     void on_cmyk_entry_changed();
     bool on_entry_key_press(GdkEventKey *event);
+    void on_history_row_activated(Gtk::ListBoxRow* row);
 };

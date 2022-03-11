@@ -44,6 +44,13 @@ bool HistoryManager::SaveColor(const Color &color)
     }
     fout.close();
 
+    ColorHistory colorH = ColorHistory();
+    colorH.color = Color(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+    time_t now = time(0);
+    string date = ctime(& now);
+    colorH.datetime = date;
+    historyList.push_back(colorH);
+
     return true;
 }
 
@@ -74,8 +81,24 @@ void HistoryManager::LoadHistory()
                 ColorHistory colorH = ColorHistory();
                 colorH.color = Color(rgbvalues[0], rgbvalues[1], rgbvalues[2], rgbvalues[3]);
                 colorH.datetime = line.substr(0, endOfKey);
-                colorHistory.push_back(colorH);
+                historyList.push_back(colorH);
             }
         }
     }
+}
+
+vector<ColorHistory> HistoryManager::GetColorHistoryList()
+{
+    return historyList;
+}
+
+ColorHistory HistoryManager::GetColorHistoryList(int index)
+{
+    int maxIndex = historyList.size() - 1;
+    if(index >= 0 && index <= maxIndex)
+    {
+        return historyList.at(maxIndex - index);
+    }
+
+    return ColorHistory();
 }
