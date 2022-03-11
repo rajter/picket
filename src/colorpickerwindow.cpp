@@ -414,7 +414,6 @@ void ColorPickerWindow::Redraw()
 
 void ColorPickerWindow::FinishPick(bool takeColor)
 {
-    app->hold();
     close();
 
     auto display = this->get_display();
