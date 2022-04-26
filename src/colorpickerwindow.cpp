@@ -173,8 +173,8 @@ void ColorPickerWindow::on_showed()
 
 bool ColorPickerWindow::on_my_motion_notify_event(GdkEventMotion* motion_event)
 {
-    x = (int)motion_event->x_root;
-    y = (int)motion_event->y_root;
+    x = (int)motion_event->x;
+    y = (int)motion_event->y;
 
     GetPixelFromPixbuf(x+outterBounds, y+outterBounds, screenshot, screenshot->get_pixels());
     Redraw();
