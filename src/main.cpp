@@ -6,6 +6,7 @@
 #include "settingswindow.h"
 #include "cfg/config.h"
 #include "utils/dirutils.h"
+#include "cfg/paths.h"
 
 using namespace std;
 
@@ -24,10 +25,10 @@ int main(int argc, char *argv[])
     config->LoadConfiguration();
 
     auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
-    auto mainWinBuilder = Gtk::Builder::create_from_file("/usr/share/picket/MainWindow.glade");
-    auto colorPickerWinBuilder = Gtk::Builder::create_from_file("/usr/share/picket/ColorPickerWindow.glade");
-    auto settingWindowBuilder = Gtk::Builder::create_from_file("/usr/share/picket/SettingsWindow.glade");
-    auto formatEditWindowBuilder = Gtk::Builder::create_from_file("/usr/share/picket/FormatEditWindow.glade");
+    auto mainWinBuilder = Gtk::Builder::create_from_file(DATADIR "/picket/MainWindow.glade");
+    auto colorPickerWinBuilder = Gtk::Builder::create_from_file(DATADIR "/picket/ColorPickerWindow.glade");
+    auto settingWindowBuilder = Gtk::Builder::create_from_file(DATADIR "/picket/SettingsWindow.glade");
+    auto formatEditWindowBuilder = Gtk::Builder::create_from_file(DATADIR "/picket/FormatEditWindow.glade");
 
     mainWinBuilder->get_widget_derived("MainWindow", window);
     colorPickerWinBuilder->get_widget_derived("ColorPickerWindow", colorPickerWindow);

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(picket)
 
+include(GNUInstallDirs)
+
 # GTKMM
 find_package(PkgConfig REQUIRED)
 pkg_search_module(gtkmm-3.0 REQUIRED IMPORTED_TARGET gtkmm-3.0)
@@ -8,6 +10,7 @@ pkg_search_module(gtkmm-3.0 REQUIRED IMPORTED_TARGET gtkmm-3.0)
 # X11
 find_package(X11 REQUIRED)
 
+configure_file("src/cfg/paths.h.in" "src/cfg/paths.h" @ONLY)
 
 add_executable(picket
         src/cfg/config.cpp
@@ -33,7 +36,8 @@ add_executable(picket
         src/mainwindow.cpp
         src/mainwindow.h
         src/settingswindow.cpp
-        src/settingswindow.h)
+        src/settingswindow.h
+        "${CMAKE_CURRENT_BINARY_DIR}/src/cfg/paths.h")
 
 target_compile_features(picket PRIVATE cxx_std_14)
 
@@ -41,22 +45,22 @@ target_include_directories(picket PRIVATE
         src
         src/cfg
         src/models
-        src/utils)
+        src/utils
+        "${CMAKE_CURRENT_BINARY_DIR}/src")
 
 target_link_libraries(picket PRIVATE
         PkgConfig::gtkmm-3.0
         X11::X11)
 
 # install target
-SET(CMAKE_INSTALL_PREFIX "/usr/")
 install(TARGETS picket)
-install(FILES "ui/MainWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "ui/SettingsWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "ui/FormatEditWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "ui/ColorPickerWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "resources/picket.desktop" DESTINATION share/applications/)
-install(FILES "resources/picket.svg" DESTINATION share/pixmaps/)
-install(FILES "LICENSE" DESTINATION share/licenses/${PROJECT_NAME})
+install(FILES "ui/MainWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/SettingsWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/FormatEditWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/ColorPickerWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "resources/picket.desktop" DESTINATION "${CMAKE_INSTALL_DATADIR}/applications/")
+install(FILES "resources/picket.svg" DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps/")
+install(FILES "LICENSE" DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/${PROJECT_NAME}")
 
 # uninstall target
 if(NOT TARGET uninstall)
