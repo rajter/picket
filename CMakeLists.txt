@@ -1,24 +1,16 @@
 cmake_minimum_required(VERSION 3.17)
 project(picket)
 
-set(CMAKE_CXX_STANDARD 14)
+include(GNUInstallDirs)
 
 # GTKMM
-find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
-link_directories(${GTKMM_LIBRARY_DIRS})
-include_directories(${GTKMM_INCLUDE_DIRS})
+find_package(PkgConfig REQUIRED)
+pkg_search_module(gtkmm-3.0 REQUIRED IMPORTED_TARGET gtkmm-3.0)
 
 # X11
 find_package(X11 REQUIRED)
-link_libraries(${X11_LIBRARIES})
-include_directories(${X11_INCLUDE_DIR})
 
-# SRC
-include_directories(src)
-include_directories(src/cfg)
-include_directories(src/models)
-include_directories(src/utils)
+configure_file("src/cfg/paths.h.in" "src/cfg/paths.h" @ONLY)
 
 add_executable(picket
         src/cfg/config.cpp
@@ -44,27 +36,37 @@ add_executable(picket
         src/mainwindow.cpp
         src/mainwindow.h
         src/settingswindow.cpp
-        src/settingswindow.h)
+        src/settingswindow.h
+        "${CMAKE_CURRENT_BINARY_DIR}/src/cfg/paths.h")
 
-target_link_libraries(picket
-        ${GTKMM_LIBRARIES})
+target_compile_features(picket PRIVATE cxx_std_14)
+
+target_include_directories(picket PRIVATE
+        src
+        src/cfg
+        src/models
+        src/utils
+        "${CMAKE_CURRENT_BINARY_DIR}/src")
+
+target_link_libraries(picket PRIVATE
+        PkgConfig::gtkmm-3.0
+        X11::X11)
 
 # install target
-SET(CMAKE_INSTALL_PREFIX "/usr/")
-install(TARGETS picket DESTINATION bin)
-install(FILES "${PROJECT_SOURCE_DIR}/ui/MainWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "${PROJECT_SOURCE_DIR}/ui/SettingsWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "${PROJECT_SOURCE_DIR}/ui/FormatEditWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "${PROJECT_SOURCE_DIR}/ui/ColorPickerWindow.glade" DESTINATION share/${PROJECT_NAME}/)
-install(FILES "${PROJECT_SOURCE_DIR}/resources/picket.desktop" DESTINATION share/applications/)
-install(FILES "${PROJECT_SOURCE_DIR}/resources/picket.svg" DESTINATION share/pixmaps/)
-install(FILES "${PROJECT_SOURCE_DIR}/LICENSE" DESTINATION share/licenses/${PROJECT_NAME})
+install(TARGETS picket)
+install(FILES "ui/MainWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/SettingsWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/FormatEditWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "ui/ColorPickerWindow.glade" DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/")
+install(FILES "resources/picket.desktop" DESTINATION "${CMAKE_INSTALL_DATADIR}/applications/")
+install(FILES "resources/picket.svg" DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps/")
+install(FILES "LICENSE" DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/${PROJECT_NAME}")
 
 # uninstall target
 if(NOT TARGET uninstall)
     configure_file(
-            "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-            "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+            "cmake_uninstall.cmake.in"
+            "cmake_uninstall.cmake"
             IMMEDIATE @ONLY)
 
     add_custom_target(uninstall
